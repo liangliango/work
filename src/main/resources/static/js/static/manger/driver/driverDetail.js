@@ -12,7 +12,7 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
 
     $.ajax({
         type: 'get',
-        url: nginx_url + '/driver/selectById/' + driverId,
+        url: nginx_url + '/emp/selectById/' + driverId,
         dataType: 'json',
         success: function (result) {
             $.each(result, function (i, item) {

@@ -32,7 +32,7 @@ public class DriverClear {
     private String driverId;
 
     @Column(length = 50)
-    private String CarriageId;
+    private String carriageId;
 
     private Double truckFee;
 
