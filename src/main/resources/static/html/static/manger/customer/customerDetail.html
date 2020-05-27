@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>客户信息详情页</title>
+    <link rel="stylesheet" href="../../../../layui/css/layui.css">
+</head>
+<body>
+
+<div class="layui-form-item" style="margin-top: 10px">
+    <form class="layui-form" action="" id="cusForm">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">客户姓名</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="customerName" disabled
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">客户类型</label>
+                <div class="layui-input-inline">
+                    <select name="customerType" lay-verify="required" disabled>
+                        <option value=""></option>
+                        <option value="0">个人客户</option>
+                        <option value="1">企业</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">地址</label>
+                <div class="layui-input-block" style="width: 514px">
+                    <input type="text" name="address" lay-verify="required" disabled
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">电子邮件</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="email" disabled
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">联系人</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="linkman" disabled
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">联系人手机</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="linkmanMobile" disabled
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">组织机构代码</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="businessLicenSe" disabled
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">身份证</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="idCard" disabled
+                            autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="../../../../layui/layui.js"></script>
+<script src="../../../../js/nginx.js"></script>
+<script src="../../../../js/static/manger/customer/customerDetail.js"></script>
+</body>
+</html>

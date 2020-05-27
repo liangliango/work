@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>员工信息详情页</title>
+    <link rel="stylesheet" href="../../../../layui/css/layui.css">
+    <link rel="stylesheet" href="../../../../css/admin.css">
+</head>
+<body>
+
+<div class="layui-form-item" style="margin-top: 10px">
+    <form class="layui-form" action="" id="driverForm">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">员工姓名</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="driverName" disabled
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">身份证号</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="idCard" disabled
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">电话</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="phone" disabled
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-inline">
+                    <select name="gender" lay-verify="required" disabled>
+                        <option value=""></option>
+                        <option value="0">男</option>
+                        <option value="1">女</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">出生日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="birthday" name="birthday" disabled
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="email" name="email" disabled
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">住址</label>
+                <div class="layui-input-block" style="width: 514px">
+                    <input type="text" name="address" disabled
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div>
+                <label class="layui-form-label">驾驶证编号</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="driveLicence" autocomplete="off"  class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">车辆类型</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="carType" disabled
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">车牌号</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="carNo" disabled
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">准载体积</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="volume" disabled
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">（单位： 立方米）</div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">准载重量</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="allowCarryWeight" disabled
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">（单位： 吨）</div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">车厢长度</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="length" disabled
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">（单位： 毫米）</div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">车厢宽度</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="width" disabled
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">（单位： 毫米）</div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">载物高度</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="height" disabled
+                           autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">（单位： 毫米）</div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="remark" disabled
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">公司车</label>
+                <div class="layui-input-inline">
+                    <input type="checkbox" lay-skin="switch" id="switchValue" lay-filter="checkCondition" disabled
+                           lay-text="是|否">
+                </div>
+            </div>
+            <input type="hidden" id="isCompany" name="isCompany" value="false">
+        </div>
+    </form>
+</div>
+<script src="../../../../layui/layui.js"></script>
+<script src="../../../../js/jquery/jquery-3.3.1.js"></script>
+
+<script src="../../../../js/nginx.js"></script>
+<script src="../../../../js/static/manger/driver/driverDetail.js"></script>
+</body>
+</html>
