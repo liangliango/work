@@ -2,7 +2,6 @@ package org.lino.work.service;
 
 import org.lino.work.base.bean.BillRoute;
 import org.lino.work.base.bean.Carriage;
-import org.lino.work.base.bean.WayBill;
 import org.lino.work.base.bean.Driver;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -64,4 +63,13 @@ public interface IDriverService {
 
     public Carriage add(Carriage carriage);
 
+    Page<Driver> findAllDriver(Pageable pageable);
+
+    Driver findDriverByDriverId(String driverId);
+
+    boolean addDriver(Driver driver);
+
+    boolean deleteDriverByDriverId(String driverId);
+
+    String updateDriverByDriverId(String driverId, Driver driver);
 }

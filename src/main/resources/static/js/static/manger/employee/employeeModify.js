@@ -8,11 +8,11 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
 
     form.render();
 
-    let driverId = window.location.href.split("=")[1];
+    let employeeId = window.location.href.split("=")[1];
 
     $.ajax({
         type: 'get',
-        url: nginx_url + '/emp/selectById/' + driverId,
+        url: nginx_url + '/manger/findEmployeeByEmployeeId/' + employeeId,
         dataType: 'json',
         success: function (result) {
             $.each(result, function (i, item) {
@@ -28,7 +28,7 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
         });
         $.ajax({
             type: 'put',
-            url: nginx_url + '/emp/update/' + driverId,
+            url: nginx_url + '/manger/updateEmployeeByEmployeeId/' + employeeId,
             data: $("#employeeForm").serialize(),
             dataType: 'json',
             success: function (result) {

@@ -9,7 +9,7 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
     let billId = window.location.href.split("=")[1];
     $.ajax({
         type: "get",
-        url: nginx_url + "/goodsBill/selectByCode/" + billId,
+        url: nginx_url + "/bill/findWayBillByBillId/" + billId,
         async: false,
         success: function (result) {
             $.each(result, function (i, item) {
@@ -17,45 +17,31 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
                 $(temp_id).val(item);
             });
 
-            // // 审核
-            // if (result.ifAudit === '审核') {
-            //     $("#ifAudit").attr('checked', 'checked');
-            //     form.render('checkbox');
-            // }
-            //
-            // // 有效
-            // if (result.validity === '有效') {
-            //     $("#validity").attr('checked', 'checked');
-            //     form.render('checkbox');
-            // }
-            //
-            // // 结账
-            // if (result.ifSettleAccounts === '结账') {
-            //     $("#ifSettleAccounts").attr('checked', 'checked');
-            //     form.render('checkbox');
-            // }
-
             // 日期
             laydate.render({
                 elem: '#startDate',
                 type: 'date',
-                value: new Date(result.sendGoodsDate)
+                value: new Date(result.startDate)
+                // theme: 'grid'
+            });
+            laydate.render({
+                elem: '#clearDate',
+                type: 'date',
+                value: new Date(result.clearDate)
+                // theme: 'grid'
+            });
+            laydate.render({
+                elem: '#arriveDate',
+                type: 'date',
+                value: new Date(result.arriveDate)
                 // theme: 'grid'
             });
             laydate.render({
                 elem: '#exceptDate',
                 type: 'date',
-                value: new Date(result.predeliveryDate)
+                value: new Date(result.exceptDate)
                 // theme: 'grid'
             });
-            // if (result.factDealDate != null && result.factDealDate !== '') {
-            //     laydate.render({
-            //         elem: '#factDealDate',
-            //         type: 'date',
-            //         value: new Date(result.factDealDate)
-            //         // theme: 'grid'
-            //     });
-            // }
 
             laydate.render({
                 elem: '#writeDate',

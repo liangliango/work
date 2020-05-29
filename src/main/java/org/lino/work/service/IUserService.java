@@ -10,4 +10,5 @@ public interface IUserService {
 
     public boolean changePassword(String loginId, String oldPassword, String newPassword);
 
+    String changePwd(String loginId, String password);
 }

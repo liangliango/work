@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>接货单填写页面</title>
+    <link rel="stylesheet" href="../../../layui/css/layui.css">
+    <link rel="stylesheet" href="../../../css/admin.css">
+    <style>
+        .wd-100 {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-form-item" style="margin-top: 20px">
+    <form class="layui-form" action="" id="wayBill">
+        <div class="layui-form-item">
+            <label class="layui-form-label wd-100">发货客户编号</label>
+            <div class="layui-input-inline">
+                <select name="sendId" lay-verify="required" lay-filter="changeSend"
+                        id="sendId" lay-search>
+                    <option value="">请选择发货客户编号</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">发货客户</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="send" name="send" disabled autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">发货客户电话</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="sendPhone" name="sendPhone" disabled autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label wd-100">发货地址</label>
+            <div class="layui-input-inline" style="width: 534px">
+                <input type="text" id="sendAdress" name="sendAdress"  autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label wd-100">收货客户编号</label>
+            <div class="layui-input-inline">
+                <select name="receiveId" lay-verify="required" lay-filter="changeSend2"
+                        id="receiveId" lay-search>
+                    <option value="">请选择收货客户编号</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">收货客户</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="receive" name="receive" disabled autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">收货客户电话</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="receivePhone" name="receivePhone"
+                           disabled autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label wd-100">收货地址</label>
+            <div class="layui-input-inline" style="width: 534px">
+                <input type="text" id="receiveAdress" name="receiveAdress"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">支付人</label>
+                <div class="layui-input-inline">
+                    <select name="receiveId" lay-verify="required" lay-filter="changeSend3"
+                            id="payCustomer" lay-search>
+                        <option value="">请选择收货客户编号</option>
+                    </select>
+                </div>
+<!--                <div class="layui-input-inline">-->
+<!--                    <input class="layui-input" id="payCustomer" name="payCustomer" autocomplete="off">-->
+<!--                </div>-->
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">支付方式</label>
+                <div class="layui-input-inline">
+                    <select name="payType" id="payType" lay-verify="required">
+                        <option value=""></option>
+                        <option value="0">现金支付</option>
+                        <option value="1">微信支付</option>
+                        <option value="2">支付宝支付</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-input-inline">货物名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="billName" name="billName" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">货物长</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="length" name="length" class="layui-input" autocomplete="off" >
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">货物宽</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="width" name="width" class="layui-input" autocomplete="off" >
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">货物高</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="height" name="height" class="layui-input" autocomplete="off" >
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">货物重量</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="weight" name="weight" class="layui-input" autocomplete="off" >
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">数量</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="number" name="number" class="layui-input" autocomplete="off" >
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">发货日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="startDate" id="startDate" class="layui-input test-item"/>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">预期交货日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="exceptDate" id="exceptDate" class="layui-input test-item"/>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">运费</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="freight" id="freight" class="layui-input test-item"/>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">保险费</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="insurance" id="insurance"  class="layui-input test-item"/>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">状态</label>
+                <div class="layui-input-inline">
+                    <select name="state" id="state" required disabled>
+                        <option value="待发">待发</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">描述</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="desc" id="desc"  class="layui-input test-item"/>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">填写日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="writeDate" id="writeDate" disabled class="layui-input test-item"/>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="addGoodsBill" id="addGoodsBill">立即提交</button>
+                <button type="reset" id="resetForm" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="../../../layui/layui.js"></script>
+<script src="../../../js/jquery/jquery-3.3.1.js"></script>
+<script src="../../../js/jquery/jquery.cookie.js"></script>
+
+<script src="../../../js/nginx.js"></script>
+<script src="../../../js/static/bill/wayBill.js"></script>
+
+</body>
+</html>

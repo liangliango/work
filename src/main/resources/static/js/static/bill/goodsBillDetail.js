@@ -4,7 +4,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
         laydate = layui.laydate,
         layer = layui.layer,
         table = layui.table;
-    let array = ['/未分发', '/未到', '/未结'];
+    let array = ['待发', '未到', '已到', '已结算'];
 
     refresh(0);
 
@@ -20,8 +20,9 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
                 layer.close(index);
                 //向服务端发送删除指令
                 $.ajax({
-                    type: "put",
-                    url: nginx_url + "/goodsBill/deleteByCode/" + data.billId,
+                    type: "delete",
+                    url: nginx_url + "/bill/deleteWayBillByBillId/"+data.billId,
+                    datatype:"json",
                     success: function (result) {
                         console.log(result);
                     }
@@ -34,13 +35,13 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
             layer.open({
                 type: 2,
                 title: '货运单信息修改',
-                content: ['modifyDetail.html?billId=' + data.billId],
+                content: ['billModifyDetail.html?billId=' + data.billId],
                 area: ['85%', '85%'],
                 shadeClose: true,
                 move: false,
                 end: function () {
                     table.reload('goodsBillTable1', {
-                        url: nginx_url + '/goodsBill/selectByEvent' + array[0]
+                        url: nginx_url + '/bill/findWayBillbyState' + array[0]
                     })
                 }
             });
@@ -48,7 +49,16 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
             layer.open({
                 type: 2,
                 title: '货运单详细信息',
-                content: ['showDetail.html?billId=' + data.billId],
+                content: ['billShowDetail.html?billId=' + data.billId],
+                area: ['85%', '85%'],
+                shadeClose: true,
+                move: false,
+            });
+        }else if (layEvent === 'clear') {
+            layer.open({
+                type: 2,
+                title: '货运单结算',
+                content: ['billModifyDetail.html?billId=' + data.billId],
                 area: ['85%', '85%'],
                 shadeClose: true,
                 move: false,
@@ -65,40 +75,77 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
     });
 
     function refresh(id) {
-        table.render({
-            elem: '#goodsBillTable' + (id + 1),
-            height: 'full-170',
-            url: nginx_url + '/goodsBill/selectByEvent' + (id !== 3 ? array[id] : ''),
-            limit: 10,
-            limits: [10],
-            request: {
-                pageName: 'pageNum' //页码的参数名称，默认：page
-                , limitName: 'limit' //每页数据量的参数名，默认：limit
-            },
-            response: {
-                statusName: 'code', //数据状态的字段名称，默认：code
-                statusCode: 200, //成功的状态码，默认：0
-                msgName: 'msg', //状态信息的字段名称，默认：msgz
-                countName: 'count', //数据总数的字段名称，默认：count
-                dataName: 'data' //数据列表的字段名称，默认：data
-            },
-            initSort: {
-                field: 'occurTime' //排序字段，对应 cols 设定的各字段名
-                , type: 'desc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
-            },
-            page: true //开启分页
-            , cellMinWidth: 60
-            , cols: [[
-                {title: 'ID', fixed: 'left', type: 'numbers', align: 'center'},
-                {field: 'billId', title: '货运单编号', align: 'center'},
-                {field: 'state', title: '状态', align: "center"},
-                {field: 'desc', title: '备注', align: 'center'},
-                // {field: 'occurTime', title: '发生时间', align: "center", templet: '#createTime', sort: true},
-                {fixed: 'right', title: "操作", align: "center", toolbar: '#barDemo' + (id + 1), width: 200}
-            ]]
-        });
-    }
+        if (id !== 4){
+            table.render({
+                elem: '#goodsBillTable' + (id + 1),
+                height: 'full-170',
+                url: nginx_url + '/bill/findWayBillbyState/'+array[id],
+                datatype:"json",
+                limit: 10,
+                limits: [10],
+                request: {
+                    pageName: 'pageNum' //页码的参数名称，默认：page
+                    , limitName: 'limit' //每页数据量的参数名，默认：limit
+                },
+                response: {
+                    statusName: 'code', //数据状态的字段名称，默认：code
+                    statusCode: 200, //成功的状态码，默认：0
+                    msgName: 'msg', //状态信息的字段名称，默认：msgz
+                    countName: 'count', //数据总数的字段名称，默认：count
+                    dataName: 'data' //数据列表的字段名称，默认：data
+                },
+                initSort: {
+                    field: 'occurTime' //排序字段，对应 cols 设定的各字段名
+                    , type: 'desc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+                },
+                page: true //开启分页
+                , cellMinWidth: 60
+                , cols: [[
+                    {title: 'ID', fixed: 'left', type: 'numbers', align: 'center'},
+                    {field: 'billId', title: '货运单编号', align: 'center'},
+                    {field: 'state', title: '状态', align: "center"},
+                    {field: 'desc', title: '备注', align: 'center'},
+                    // {field: 'occurTime', title: '发生时间', align: "center", templet: '#createTime', sort: true},
+                    {fixed: 'right', title: "操作", align: "center", toolbar: '#barDemo' + (id + 1), width: 200}
+                ]]
+            });
+        }
+        if (id===4){
+            table.render({
+                elem: '#goodsBillTable' + (id + 1),
+                height: 'full-170',
+                url: nginx_url + '/bill/findAllWayBill',
+                limit: 10,
+                limits: [10],
+                request: {
+                    pageName: 'pageNum' //页码的参数名称，默认：page
+                    , limitName: 'limit' //每页数据量的参数名，默认：limit
+                },
+                response: {
+                    statusName: 'code', //数据状态的字段名称，默认：code
+                    statusCode: 200, //成功的状态码，默认：0
+                    msgName: 'msg', //状态信息的字段名称，默认：msgz
+                    countName: 'count', //数据总数的字段名称，默认：count
+                    dataName: 'data' //数据列表的字段名称，默认：data
+                },
+                initSort: {
+                    field: 'occurTime' //排序字段，对应 cols 设定的各字段名
+                    , type: 'desc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+                },
+                page: true //开启分页
+                , cellMinWidth: 60
+                , cols: [[
+                    {title: 'ID', fixed: 'left', type: 'numbers', align: 'center'},
+                    {field: 'billId', title: '货运单编号', align: 'center'},
+                    {field: 'state', title: '状态', align: "center"},
+                    {field: 'desc', title: '备注', align: 'center'},
+                    // {field: 'occurTime', title: '发生时间', align: "center", templet: '#createTime', sort: true},
+                    {fixed: 'right', title: "操作", align: "center", toolbar: '#barDemo' + (id + 1), width: 200}
+                ]]
+            });
+        }
 
+    }
 });
 
 // function createTime(v) {

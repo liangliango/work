@@ -1,15 +1,19 @@
 package org.lino.work.service.impl;
 
+import cn.hutool.crypto.SecureUtil;
 import org.lino.work.base.bean.*;
 import org.lino.work.iobus.dao.*;
 import org.lino.work.service.IDriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.List;
 
+@Service("IDriverService")
 public class DriverServiceImpl implements IDriverService {
 
     private static final String sj="SJ";
@@ -37,18 +41,14 @@ public class DriverServiceImpl implements IDriverService {
     @Override
     public boolean addNewDriver(Driver driverInfo) {
 
-        String id = sj+(int)Math.random()*100000;
-        Driver driverId = driverDao.findByDriverId(id);
-        while(driverId != null){
-            id = sj+(int)Math.random()*100000;
-            driverId = driverDao.findByDriverId(id);
-        }
+        String id = sj+System.currentTimeMillis();
         driverInfo.setDriverId(id);
         try {
             driverDao.save(driverInfo);
             User user = new User();
             user.setLoginId(driverInfo.getDriverId());
-            user.setPassword("123456");
+            String pwd = SecureUtil.md5("123456");
+            user.setPassword(pwd);
             userDao.save(user);
             return true;
         } catch (Exception e) {
@@ -121,4 +121,52 @@ public class DriverServiceImpl implements IDriverService {
             return null;
         }
     }
+
+    @Override
+    public Page<Driver> findAllDriver(Pageable pageable) {
+        return driverDao.findAll(pageable);
+    }
+
+    @Override
+    public Driver findDriverByDriverId(String driverId) {
+        return driverDao.findByDriverId(driverId);
+    }
+
+    @Transactional
+    @Override
+    public boolean addDriver(Driver driver) {
+
+        this.addNewDriver(driver);
+        return false;
+    }
+
+    @Transactional
+    @Override
+    public boolean deleteDriverByDriverId(String driverId) {
+
+        try {
+            driverDao.deleteByDriverId(driverId);
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Transactional
+    @Override
+    public String updateDriverByDriverId(String driverId, Driver driver) {
+
+        try {
+            driver.setDriverId(driverId);
+            driverDao.save(driver);
+
+            return "SUCCESS";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "ERROR";
+        }
+    }
+
 }

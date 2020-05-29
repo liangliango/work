@@ -7,7 +7,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
     form.verify({
         postcode: function (value, item) {
             if (!new RegExp("^[0-9]{6}$").test(value)) {
-                return '邮编格式不正确';
+                return '邮箱格式不正确';
             }
         }
     });
@@ -18,7 +18,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
             table.render({
                 elem: '#cusTable',
                 height: 'full-170',
-                url: nginx_url + '/selectAllCus', //数据接口
+                url: nginx_url + '/manger/findAllCusomer', //数据接口
                 limit: 10,
                 limits: [10],
                 request: {
@@ -58,7 +58,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
                         //向服务端发送删除指令
                         $.ajax({
                             type: "DELETE",
-                            url: nginx_url + "/deleteCus/" + data.customerCode,
+                            url: nginx_url + "/manger/deleteCusomerByCustomerId/" + data.customerId,
                             success: function (result) {
                                 console.log(result);
                             }
@@ -71,13 +71,13 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
                     layer.open({
                         type: 2,
                         title: '客户信息修改',
-                        content: ['customerModify.html?customerCode=' + data.customerCode, 'no'],
+                        content: ['customerModify.html?customerId=' + data.customerId],
                         area: ['85%', '85%'],
                         shadeClose: true,
                         move: false,
                         end: function () {
                             table.reload('cusTable', {
-                                url: nginx_url + '/selectAllCus'
+                                url: nginx_url + '/manger/findAllCusomer'
                             })
                         }
                     });
@@ -85,7 +85,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
                     layer.open({
                         type: 2,
                         title: '客户详细信息',
-                        content: ['customerDetail.html?customerCode=' + data.customerCode, 'no'],
+                        content: ['customerDetail.html?customerId=' + data.customerId],
                         area: ['85%', '85%'],
                         shadeClose: true,
                         move: false,
@@ -98,7 +98,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
     form.on('submit(addCus)', function (data) {
         $.ajax({
             type: "post",
-            url: nginx_url + "/addCus",
+            url: nginx_url + "/manger/addCusomer",
             data: $("#cusForm").serialize(),
             dataType: "json",
             success: function (result) {

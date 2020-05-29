@@ -8,7 +8,7 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
     let customerId = window.location.href.split("=")[1];
     $.ajax({
         type: "get",
-        url: nginx_url + "/selectCusByCode/" + customerId,
+        url: nginx_url + "/manger/findCustomerByCustomerId/" + customerId,
         success: function (result) {
             console.log(result);
             $("#customerName").val(result.customerName);

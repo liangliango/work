@@ -11,7 +11,6 @@ import java.util.List;
 
 public interface ICityService {
 
-    public List<CityRoute> findCityRoute(int start, int end);
 
     public List<City> findCity();
 
@@ -32,5 +31,7 @@ public interface ICityService {
     public boolean addCityRoute(CityRoute cityRoute);
 
     public boolean addBillRoute(BillRoute billRoute);
+
+    List<City> findAllCity();
 
 }

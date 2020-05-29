@@ -29,7 +29,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function (
 
     $.ajax({
         type: "get",
-        url: nginx_url + "/selectAllCusCode",
+        url: nginx_url + "/bill/findAllCustomerId",
         async: false,
         success: function (result) {
             $.each(result, function (i, item) {
@@ -49,11 +49,10 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function (
         // ajax
         $.ajax({
             type: 'get',
-            url: nginx_url + '/selectCusByCode/' + data.value,
+            url: nginx_url + '/bill/findCustomerByCustomerId/' + data.value,
             success: function (result) {
                 $("#send").val(result.customerName);
                 $("#sendPhone").val(result.linkmanMobile);
-                // $("#sendAdress").val(result.address);
             }
         });
     });
@@ -62,23 +61,14 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function (
         // ajax
         $.ajax({
             type: 'get',
-            url: nginx_url + '/selectCusByCode/' + data.value,
+            url: nginx_url + '/bill/findCustomerByCustomerId/' + data.value,
             success: function (result) {
                 $("#receive").val(result.customerName);
                 $("#receivePhone").val(result.linkmanMobile);
-                // $("#receiveAdress").val(result.address);
             }
         });
     });
 
-    // form.on('switch(checkSettle)', function (data) {
-    //     if (data.elem.checked === true) {
-    //         $("#ifSettleAccounts").val('true');
-    //     } else {
-    //         $("#ifSettleAccounts").val('false');
-    //     }
-    //     // form.render();
-    // });
 
     // 货运单信息添加
     // $("#addGoodsBill").click(function () {
@@ -87,13 +77,10 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function (
         $("#goodsBillForm :input").each(function () {
             $(this).removeAttr("disabled");
         });
-        // $("#factDealDate").attr("disabled", "disabled");
-        // $("#transferFee").attr("disabled", "disabled");
-        // $("#moneyOfChangePay").attr("disabled", "disabled");
 
         $.ajax({
             type: "post",
-            url: nginx_url + "/goodsBill/add",
+            url: nginx_url + "/bill/addWayBill",
             data: $("#goodsBillForm").serialize(),
             dataType: "json",
             async: false,
@@ -104,15 +91,6 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function (
                         icon: 1
                     });
                     $("#resetForm").click();
-                    // layer.open({
-                    //     type: 2,
-                    //     title: '货运单编号：' + result.goodsBillCode,
-                    //     content: ['editGoods.html?id=' + result.goodsBillCode, 'no'],
-                    //     area: ['85%', '85%'],
-                    //     shadeClose: true,
-                    //     move: false
-                    // });
-                    // $("#resetForm").click();
                 } else {
                     layer.msg('货运单添加失败', {
                         time: 800,

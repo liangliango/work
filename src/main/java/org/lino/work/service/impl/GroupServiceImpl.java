@@ -4,7 +4,6 @@ import cn.hutool.log.Log;
 import org.lino.work.base.bean.PageWithGroup;
 import org.lino.work.base.bean.Group;
 import org.lino.work.iobus.dao.*;
-import org.lino.work.service.IGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

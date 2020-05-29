@@ -12,10 +12,12 @@ import org.lino.work.service.ICityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.List;
 
+@Service("ICityService")
 public class CityServiceImpl implements ICityService {
 
     @Autowired
@@ -30,10 +32,6 @@ public class CityServiceImpl implements ICityService {
     @Autowired
     private ICityRouteDao cityRouteDao;
 
-    @Override
-    public List<CityRoute> findCityRoute(int start, int end) {
-        return cityRouteDao.findByStartStationAndEndStation(start, end);
-    }
 
     @Override
     public List<City> findCity() {
@@ -127,5 +125,10 @@ public class CityServiceImpl implements ICityService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<City> findAllCity() {
+        return cityDao.findAll();
     }
 }

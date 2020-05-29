@@ -12,7 +12,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'],function ()
     $("#routeInfo").empty();
     $.ajax({
         type: 'get',
-        url: nginx_url + '/route/findAll',
+        url: nginx_url + '/city/findAllCityRoute',
         dataType: 'json',
         success: function (result) {
             console.log(result);

@@ -7,13 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface ICityRouteDao extends JpaRepository<CityRoute, Long> {
+public interface ICityRouteDao extends JpaRepository<CityRoute, Integer> {
 
     @Modifying
     @Query(value = "truncate table routeinfo", nativeQuery = true)
     public void truncateTable();
 
-    public List<CityRoute> findByStartStationAndEndStation(int startStation, int endStation);
+    public List<CityRoute> findByStartStationAndEndStation(String startStation, String endStation);
 
 
+    CityRoute findByRouteIdrouteId();
 }

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>员工管理页面</title>
+    <link rel="stylesheet" href="../../../../layui/css/layui.css">
+    <link rel="stylesheet" href="../../../../css/admin.css">
+</head>
+<body>
+<div class="layui-tab layui-tab-brief" lay-filter="driverFilter">
+
+    <ul class="layui-tab-title">
+        <li class="layui-this">员工添加</li>
+        <li>员工查询</li>
+    </ul>
+
+    <div class="layui-tab-content" style="height: 100px; display: block">
+        <div class="layui-tab-item layui-show">
+            <div class="layui-form-item">
+                <form class="layui-form" action="" id="employeeForm">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">员工姓名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="driverName" required lay-verify="required"
+                                       placeholder="请输入司机姓名" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">部门</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="idCard" required lay-verify="required|identity"
+                                       placeholder="请输入身份证号" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">职位</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="phone" required lay-verify="required|phone" placeholder="请输入电话"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">身份证</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="idcard" name="idcard" required lay-verify="required"
+                                       placeholder="请输入身份证号码" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">电话</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="phone" name="phone" required lay-verify="required"
+                                       placeholder="请输入员工电话号码" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">性别</label>
+                            <div class="layui-input-inline">
+                                <select name="gender" lay-verify="required" id="gender">
+                                    <option value=""></option>
+                                    <option value="男">男</option>
+                                    <option value="女">女</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">出生日期</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="birthday" name="birthday" required lay-verify="required"
+                                       placeholder="请输入出生日期" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="addEmp" id="addEmp">立即提交</button>
+                            <button type="reset" id="resetForm" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="layui-tab-item">
+            <table id="driverTable" lay-filter="driverTool" lay-data="{id: 'driverTable'}"></table>
+            <script type="text/html" id="barDemo">
+                <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="detail">查看详情</a>
+                <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+                <a class="layui-btn layui-btn-danger layui-btn-xs" data-method="offset" lay-event="del">删除</a>
+            </script>
+            <script id="createTime" type="text/html">
+                {{ createTime(d.birthday) }}
+            </script>
+        </div>
+    </div>
+
+</div>
+<script src="../../../../layui/layui.js"></script>
+<script src="../../../../js/jquery/jquery-3.3.1.js"></script>
+
+<script src="../../../../js/nginx.js"></script>
+<script src="../../../../js/static/manger/employee/employee.js"></script>
+</body>
+</html>

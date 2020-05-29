@@ -6,10 +6,10 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
         table = layui.table,
         $ = layui.jquery;
 
-    let goodsRevertBillCode = window.location.href.split("=")[1];
+    let carriageId = window.location.href.split("=")[1];
     $.ajax({
         type: "get",
-        url: nginx_url + "/vehicle/selectByCode/" + goodsRevertBillCode,
+        url: nginx_url + "/carriage/findCarriageByCarriageId/" + carriageId,
         async: false,
         success: function (result) {
             $.each(result, function (i, item) {

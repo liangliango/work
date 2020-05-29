@@ -14,7 +14,7 @@ layui.use(['element','table','jquery','form', 'layer'],function () {
 
         $.ajax({
             type: 'post',
-            url: nginx_url + '/route/findStartAndEnd',
+            url: nginx_url + '/city/findCityRouteByStartAndEnd',
             data: $("#findRoute").serialize(),
             datatype: json,
             success: function (date, result) {

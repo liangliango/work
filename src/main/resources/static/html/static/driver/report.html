@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>货物路线</title>
+    <link rel="stylesheet" href="../../../layui/css/layui.css">
+    <link rel="stylesheet" href="../../../css/admin.css">
+</head>
+<body>
+<div class="layui-form-item" style="margin-top: 20px">
+    <form class="layui-form" action="" id="billRouteForm">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">货物编号</label>
+                <div class="layui-input-inline">
+                    <select id="billId" lay-filter="changeSend">
+                        <option value="">请选择货运单编号</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">起点</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" id="start" name="start" disabled autocomplete="off" >
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">终点</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" id="end" name="end" disabled autocomplete="off" >
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">途径站点</label>
+                <div style="padding: 20px; background-color: #F2F2F2;" id="routeInfo">
+
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">当前位置</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" id="now" name="now"  autocomplete="off" >
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">登记时间</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" id="signDate" name="signDate" disabled autocomplete="off" >
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">货物状态</label>
+                <div class="layui-input-inline">
+                    <select id="billstate">
+                        <option value="">请选择货物情况</option>
+                        <option value="未到">未到</option>
+                        <option value="已到">已到</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn" lay-submit lay-filter="modifyBillROute" id="addBillROute">
+                    立即提交
+                </button>
+                <button type="reset" id="resetForm" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="../../../layui/layui.js"></script>
+<script src="../../../js/jquery/jquery-3.3.1.js"></script>
+
+<script src="../../../js/nginx.js"></script>
+<script src="../../../js/static/driver/route.js"></script>
+
+</body>
+</html>

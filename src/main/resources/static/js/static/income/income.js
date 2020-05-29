@@ -9,7 +9,7 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
     // let goodsBillCode = window.location.href.split("=")[1];
     $.ajax({
         type: "get",
-        url: nginx_url + "/income/selectIncomeByMonth",
+        url: nginx_url + "/income/countIncomeByMonth",
         async: false,
         success: function (result) {
             $.each(result, function (i, item) {

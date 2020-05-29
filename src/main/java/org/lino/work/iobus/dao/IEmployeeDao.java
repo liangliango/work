@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface IEmployeeDao extends JpaRepository<Employee, Long> {
 
-    public Employee findByEmployeeCode(String employeeCode);
+    public Employee findByEmployeeId(String employeeId);
 
     @Transactional
     @Modifying

@@ -25,7 +25,7 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
     form.on('submit(addDriver)', function () {
         $.ajax({
             type: 'post',
-            url: nginx_url + '/driver/add',
+            url: nginx_url + '/manger/addDriver',
             data: $("#driverForm").serialize(),
             dataType: 'json',
             success: function (result) {
@@ -52,7 +52,7 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
             table.render({
                 elem: '#driverTable',
                 height: 'full-170',
-                url: nginx_url + '/driverInfo/selectAllByPage', //数据接口
+                url: nginx_url + '/manger/findAllDriverByPage', //数据接口
                 limit: 10,
                 limits: [10],
                 request: {
@@ -91,7 +91,7 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
                         //向服务端发送删除指令
                         $.ajax({
                             type: "DELETE",
-                            url: nginx_url + "/driverInfo/delete/" + data.id,
+                            url: nginx_url + "/manger/deleteDriverByDriverId/" + data.driverId,
                             async: false,
                             dataType: 'json',
                             success: function (result) {
@@ -110,7 +110,7 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
                             }
                         });
                         table.reload('driverTable', {
-                            url: nginx_url + '/driverInfo/selectAllByPage'
+                            url: nginx_url + '/manger/findAllDriverByPage'
                         });
                     });
 
@@ -118,13 +118,13 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
                     layer.open({
                         type: 2,
                         title: '司机 - ' + data.id + '信息修改',
-                        content: ['driverModify.html?id=' + data.id, 'no'],
+                        content: ['driverModify.html?driverId=' + data.driverId],
                         area: ['95%', '95%'],
                         shadeClose: true,
                         move: false,
                         end: function () {
                             table.reload('driverTable', {
-                                url: nginx_url + '/driverInfo/selectAllByPage'
+                                url: nginx_url + '/manger/findAllDriverByPage'
                             })
                         }
                     });
@@ -132,7 +132,7 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
                     layer.open({
                         type: 2,
                         title: '司机 - ' + data.id + ' 信息详情',
-                        content: ['driverDetail.html?id=' + data.id, 'no'],
+                        content: ['driverDetail.html?driverId=' + data.driverId, 'no'],
                         area: ['95%', '95%'],
                         shadeClose: true,
                         move: false
@@ -141,5 +141,4 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
             });
         }
     });
-    form1.render();
 });

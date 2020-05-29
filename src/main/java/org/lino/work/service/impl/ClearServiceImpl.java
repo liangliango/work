@@ -5,7 +5,6 @@ import org.lino.work.iobus.dao.ICarriageDao;
 import org.lino.work.iobus.dao.ICustomerClearDao;
 import org.lino.work.iobus.dao.IDriverClearDao;
 import org.lino.work.iobus.dao.IWayBillDao;
-import org.lino.work.service.IClearService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

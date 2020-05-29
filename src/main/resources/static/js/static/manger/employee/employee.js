@@ -18,7 +18,7 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
     form.on('submit(addEmp)', function () {
         $.ajax({
             type: 'post',
-            url: nginx_url + '/emp/add',
+            url: nginx_url + '/manger/addEmployee',
             data: $("#employeeForm").serialize(),
             dataType: 'json',
             success: function (result) {
@@ -45,7 +45,7 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
             table.render({
                 elem: '#driverTable',
                 height: 'full-170',
-                url: nginx_url + '/emp/selectAllByPage', //数据接口
+                url: nginx_url + '/manger/findAllEmployeeByPage', //数据接口
                 limit: 10,
                 limits: [10],
                 request: {
@@ -83,7 +83,7 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
                         //向服务端发送删除指令
                         $.ajax({
                             type: "DELETE",
-                            url: nginx_url + "/emp/delete/" + data.employeeId,
+                            url: nginx_url + "/manger/deleteEmployeeByEmployeeId/" + data.employeeId,
                             async: false,
                             dataType: 'json',
                             success: function (result) {
@@ -102,7 +102,7 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
                             }
                         });
                         table.reload('driverTable', {
-                            url: nginx_url + '/emp/selectAllByPage'
+                            url: nginx_url + '/manger/findAllEmployeeByPage'
                         });
                     });
 
@@ -116,7 +116,7 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
                         move: false,
                         end: function () {
                             table.reload('driverTable', {
-                                url: nginx_url + '/emp/selectAllByPage'
+                                url: nginx_url + '/manger/findAllEmployeeByPage'
                             })
                         }
                     });
@@ -133,5 +133,4 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
             });
         }
     });
-    form1.render();
 });

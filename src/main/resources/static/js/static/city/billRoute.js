@@ -15,7 +15,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'],function ()
     });
     $.ajax({
         type: get,
-        url:nginx_url+'/city/findAll',
+        url:nginx_url+'/city/findAllCity',
         dataType: 'json',
         success:function (result) {
             $.each(result,function (i,item) {
@@ -38,31 +38,6 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'],function ()
             $.each(result, function (i, item) {
                 let option = '<option value="'+item.routeId+'">'+item.routeId+'</option>';
                 $("#routeId").append(option);
-                // let content = '<div class="layui-row layui-col-space15">' +
-                //     '<div class="layui-col-md12">' +
-                //     '<div class="layui-card">' +
-                //     '<div class="layui-card-header">' +
-                //     '<div class="layui-col-md4">';
-                // content += item.startStation + ' - ' + item.endStation;
-                // content += '</div><div class="layui-col-md4">';
-                // content += '里程：' + item.distance + 'km';
-                // content += '</div><div class="layui-col-md4">';
-                // content += '耗时：' + item.fetchTime + '天';
-                // content += '</div></div>' +
-                //     '<div class="layui-card-body layui-col-space10">';
-                // if (item.passStation !== '') {
-                //     let passStation = item.passStation.split(',');
-                //     $.each(passStation, function (j, temp) {
-                //         content += j === 0 ? '' : ' - ';
-                //         content += '<span class="layui-badge-dot ' + range_dot[(rand++ % 7)] + '"></span> ';
-                //         content += '<span> ' + temp + '</span>'
-                //
-                //     });
-                // } else {
-                //     content += '<span class="layui-badge-dot ' + range_dot[(rand++ % 7)] + '"></span>';
-                //     content += '<span> 直达</span>'
-                // }
-                // $("#routeInfo").append(content);
             }
         );
         }
@@ -70,7 +45,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'],function ()
     form.on('select(changeSend)',function (data) {
         $.ajax({
             type:get,
-            url:nginx_url+'/route/findByRouteId'+data.val(),
+            url:nginx_url+'/city/findRouteByRouteId'+data.val(),
             success:function (result) {
                 let content = '<div class="layui-row layui-col-space15">' +
                     '<div class="layui-col-md12">' +
@@ -99,5 +74,30 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'],function ()
                 $("#routeInfo").append(content);
             }
         })
+    })
+
+    form.on('submit(addBillRoute)',function () {
+        $.ajax({
+            type:"post",
+            url:nginx_url+'/city/addBillRoute',
+            data: $("#addBillROute").serialize(),
+            dataType:"json",
+            success: function (result) {
+                if (result.status === "SUCCESS") {
+                    layer.msg('货物路线信息添加成功', {
+                        time: 800,
+                        icon: 1
+                    });
+                    $("#resetForm").click();
+                } else {
+                    layer.msg('货物路线信息添加失败', {
+                        time: 800,
+                        icon: 2
+                    });
+                }
+                console.log(result);
+            }
+        })
+
     })
 })

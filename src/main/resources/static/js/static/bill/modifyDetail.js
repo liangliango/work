@@ -7,33 +7,21 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
         $ = layui.jquery;
 
     let billId = window.location.href.split("=")[1];
+    laydate.render({
+        elem: '#writeDate',
+        type: 'date',
+        value: new Date()
+        // theme: 'grid'
+    });
     $.ajax({
         type: "get",
-        url: nginx_url + "/goodsBill/selectByCode/" + billId,
+        url: nginx_url + "/bill/findWayBillByBillId/" + billId,
         success: function (result) {
             console.log(result);
             $.each(result, function (i, item) {
                 let temp_id = '#' + i;
                 $(temp_id).val(item);
             });
-
-            // // 审核
-            // if (result.ifAudit === '审核') {
-            //     $("#ifAudit").attr('checked', 'checked');
-            //     form.render('checkbox');
-            // }
-            //
-            // // 有效
-            // if (result.validity === '有效') {
-            //     $("#validity").attr('checked', 'checked');
-            //     form.render('checkbox');
-            // }
-            //
-            // // 结账
-            // if (result.ifSettleAccounts === '结账') {
-            //     $("#ifSettleAccounts").attr('checked', 'checked');
-            //     form.render('checkbox');
-            // }
 
             // 日期
             laydate.render({
@@ -42,14 +30,7 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
                 value: new Date(result.startDate)
                 // theme: 'grid'
             });
-            // if (result.factDealDate != null && result.factDealDate !== '') {
-            //     laydate.render({
-            //         elem: '#factDealDate',
-            //         type: 'date',
-            //         value: new Date(result.factDealDate)
-            //         // theme: 'grid'
-            //     });
-            // }
+
             laydate.render({
                 elem: '#exceptDate',
                 type: 'date',
@@ -59,7 +40,7 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
             laydate.render({
                 elem: '#writeDate',
                 type: 'date',
-                value: new Date(result.writeDate)
+                value: new Date()
                 // theme: 'grid'
             });
         }
@@ -73,7 +54,7 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
 
         $.ajax({
             type: 'put',
-            url: nginx_url + '/goodsBill/updateByCode/' + billId,
+            url: nginx_url + '/bill/updateWayBillByBillId/' + billId,
             data: $("#goodsBillForm").serialize(),
             dataType: "json",
             success: function (result) {
@@ -98,16 +79,10 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
         return false;
     });
 
-    lay('.test-item').each(function () {
-        laydate.render({
-            elem: this,
-            trigger: 'click'
-        })
-    });
 
     $.ajax({
         type: "get",
-        url: nginx_url + "/selectAllCusCode",
+        url: nginx_url + "/bill/findAllCustomerId",
         success: function (result) {
             $.each(result, function (i, item) {
                 let option = "<option value='" + item + "'>";
@@ -126,11 +101,10 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
         // ajax
         $.ajax({
             type: 'get',
-            url: nginx_url + '/selectCusByCode/' + data.value,
+            url: nginx_url + '/bill/findCustomerByCustomerId' + data.value,
             success: function (result) {
                 $("#send").val(result.customer);
                 $("#sendPhone").val(result.phone);
-                // $("#sendGoodsCustomerAddr").val(result.address);
             }
         });
     });
@@ -139,25 +113,12 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
         // ajax
         $.ajax({
             type: 'get',
-            url: nginx_url + '/selectCusByCode/' + data.value,
+            url: nginx_url + '/bill/findCustomerByCustomerId' + data.value,
             success: function (result) {
                 $("#receive").val(result.customer);
                 $("#receivePhone").val(result.phone);
-                // $("#receiveGoodsCustomerAddr").val(result.address);
             }
         });
     });
-    // form.on('select(changeSend3)', function (data) {
-    //     // ajax
-    //     $.ajax({
-    //         type: 'get',
-    //         url: nginx_url + '/selectCusByCode/' + data.value,
-    //         success: function (result) {
-    //             $("#receive").val(result.customer);
-    //             $("#receivePhone").val(result.phone);
-    //             // $("#receiveGoodsCustomerAddr").val(result.address);
-    //         }
-    //     });
-    // });
 
 });

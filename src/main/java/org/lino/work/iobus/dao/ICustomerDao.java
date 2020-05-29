@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ICustomerDao extends JpaRepository<Customer, Long> {
 
-    public Customer findByCustomerId(String customerCode);
+    public Customer findByCustomerId(String customerId);
 
     @Query(value = "select customerId from customer")
     public List<String> findAllCustomerId();

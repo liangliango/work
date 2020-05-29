@@ -8,7 +8,7 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
     let customerId = window.location.href.split("=")[1];//获得Id
     $.ajax({
         type: "get",
-        url: nginx_url + "/selectCusByCode/" + customerId,
+        url: nginx_url + "/manger/findCusomerByCustomerId/" + customerId,
         success: function (result) {
             console.log(result);
             $("#customerCode").val(result.customerCode);
@@ -29,7 +29,7 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
         });
         $.ajax({
             type: 'put',
-            url: nginx_url + '/updateCustomerInfo/' + customerCode,
+            url: nginx_url + '/manger/updateCustomerByCustomerId/' + customerId,
             data: $("#cusForm").serialize(),
             dataType: "json",
             success: function (result) {
@@ -56,7 +56,7 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
     form.verify({
         postcode: function (value, item) {
             if (!new RegExp("^[0-9]{6}$").test(value)) {
-                return '邮编格式不正确';
+                return '邮箱格式不正确';
             }
         }
     });

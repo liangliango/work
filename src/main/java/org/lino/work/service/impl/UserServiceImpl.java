@@ -67,4 +67,18 @@ public class UserServiceImpl implements IUserService {
 
         return false;
     }
+
+    @Override
+    public String changePwd(String loginId, String password) {
+
+        try {
+            User user = userDao.findByLoginId(loginId);
+            user.setPassword(password);
+            userDao.save(user);
+            return "SUCCESS";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "ERROR";
+        }
+    }
 }

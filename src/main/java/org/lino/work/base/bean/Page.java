@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "page")
+@Entity(name = "page_")
 public class Page {
 
     @Id
