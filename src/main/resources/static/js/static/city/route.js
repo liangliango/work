@@ -46,4 +46,5 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'],function ()
             });
         }
     })
+
 })

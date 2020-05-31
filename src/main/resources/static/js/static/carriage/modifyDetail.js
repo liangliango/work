@@ -5,7 +5,22 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
         layer = layui.layer,
         table = layui.table,
         $ = layui.jquery;
-
+    $.ajax({
+        type: 'get',
+        url: nginx_url + '/carriage/findAllCity',
+        dataType: 'json',
+        async: false,
+        success: function (result) {
+            $.each(result, function (i, item) {
+                let option = '<option value="' + item.city + '">';
+                option += item.city;
+                option += '</option>';
+                $("#sendAdreass").append(option);
+                $("#reciverAdreass").append(option);
+            });
+            form.render('select');
+        }
+    });
     let carriageId = window.location.href.split("=")[1];
     $.ajax({
         type: "get",
@@ -15,6 +30,10 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
             $.each(result, function (i, item) {
                 let temp_id = '#' + i;
                 $(temp_id).val(item);
+                // if(i==="payType"){
+                //     let conntext = '<option value = "'+i+'" selected>'+item+'</option>';
+                //     $(temp_id).append(conntext);
+                // }
             });
 
             // 日期

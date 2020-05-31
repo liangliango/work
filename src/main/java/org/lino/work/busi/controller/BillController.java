@@ -2,10 +2,15 @@ package org.lino.work.busi.controller;
 
 import io.swagger.annotations.Api;
 import org.lino.work.base.bean.Customer;
+import org.lino.work.base.bean.Employee;
+import org.lino.work.base.bean.Page;
 import org.lino.work.base.bean.WayBill;
+import org.lino.work.base.util.Result;
 import org.lino.work.service.ICustomerService;
 import org.lino.work.service.IWayBillService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -53,19 +58,23 @@ public class BillController {
     }
 
     @RequestMapping(value = "/findWayBillbyState/{state}",method = RequestMethod.GET)
-    public WayBill findWayBillbyState(@PathVariable("state")String state){
+    public Result findWayBillbyState(@PathVariable("state")String state,@RequestParam("pageNum") int pageNum, @RequestParam("limit") int limit){
 
-        WayBill bill = wayBillService.findWayBillbyState(state);
-
-        return bill;
+//        List<WayBill> bill = wayBillService.findWayBillbyState(state);
+        Pageable pageable = PageRequest.of(pageNum - 1, limit);
+        org.springframework.data.domain.Page<WayBill> page = wayBillService.findWayBillbyState(state,pageable);
+        Result result = new Result(200, "SUCCESS", (int) page.getTotalElements(), page.getContent());
+        return result;
     }
 
     @RequestMapping(value = "/findAllWayBill",method = RequestMethod.GET)
-    public List<WayBill> findAllWayBill(){
+    public Result findAllWayBill(@RequestParam("pageNum") int pageNum, @RequestParam("limit") int limit){
 
-        List<WayBill> bill = wayBillService.findAllWayBill();
-
-        return bill;
+//        List<WayBill> bill = wayBillService.findAllWayBill();
+        Pageable pageable = PageRequest.of(pageNum - 1, limit);
+        org.springframework.data.domain.Page<WayBill> page = wayBillService.findAllWayBill(pageable);
+        Result result = new Result(200, "SUCCESS", (int) page.getTotalElements(), page.getContent());
+        return result;
     }
 
     @RequestMapping(value = "/findAllCustomerId",method = RequestMethod.GET)
@@ -77,14 +86,14 @@ public class BillController {
     }
 
     @RequestMapping(value = "/findCustomerByCustomerId/{customerId}",method = RequestMethod.GET)
-    public Customer findCustomerByCustomerId(@PathVariable("state")String customerId){
+    public Customer findCustomerByCustomerId(@PathVariable("customerId")String customerId){
 
         Customer customer = customerService.findCustomerByCustomerId(customerId);
 
         return customer;
     }
 
-    @RequestMapping(value = "/addWayBill",method = RequestMethod.POST)
+    @RequestMapping(value = "/addWayBill",method = RequestMethod.POST,produces = "application/json")
     public String addWayBill(WayBill waybill){
 
         boolean flag = wayBillService.addWayBIll(waybill);

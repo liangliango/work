@@ -4,6 +4,8 @@ import org.lino.work.base.bean.WayBill;
 import org.lino.work.iobus.dao.IWayBillDao;
 import org.lino.work.service.IWayBillService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,23 +54,21 @@ public class IWayBillServiceImpl implements IWayBillService {
     }
 
     @Override
-    public WayBill findWayBillbyState(String state) {
-        return wayBillDao.findByState(state);
+    public org.springframework.data.domain.Page<WayBill> findWayBillbyState(String state, Pageable pageable) {
+        return wayBillDao.findByState(state,pageable);
     }
 
     @Override
-    public List<WayBill> findAllWayBill() {
-        return wayBillDao.findAll();
+    public Page<WayBill> findAllWayBill(Pageable pageable) {
+        return wayBillDao.findAll(pageable);
     }
 
+    @Transactional
     @Override
     public boolean addWayBIll(WayBill waybill) {
 
         try {
-            String id = HYD+Math.random()*1000000;
-            while(wayBillDao.findByBillId(id).getBillId()!=null){
-                id = HYD+Math.random()*1000000;
-            }
+            String id = HYD+System.currentTimeMillis();
             waybill.setBillId(id);
             wayBillDao.save(waybill);
             return true;
@@ -81,7 +81,7 @@ public class IWayBillServiceImpl implements IWayBillService {
     @Override
     public List<WayBill> findWayBillByState1() {
 
-        return wayBillDao.findWayBillByState("待发");
+        return wayBillDao.findWayBillByState("未到");
     }
 
 }

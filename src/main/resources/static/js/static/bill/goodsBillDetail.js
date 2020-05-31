@@ -23,8 +23,9 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
                     type: "delete",
                     url: nginx_url + "/bill/deleteWayBillByBillId/"+data.billId,
                     datatype:"json",
-                    success: function (result) {
+                    success: function (result,data) {
                         console.log(result);
+                        refresh(data.index);
                     }
                 });
                 layer.msg('删除成功', {
@@ -41,7 +42,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
                 move: false,
                 end: function () {
                     table.reload('goodsBillTable1', {
-                        url: nginx_url + '/bill/findWayBillbyState' + array[0]
+                        url: nginx_url + '/bill/findWayBillbyState/' + array[0]
                     })
                 }
             });
@@ -104,7 +105,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
                     {title: 'ID', fixed: 'left', type: 'numbers', align: 'center'},
                     {field: 'billId', title: '货运单编号', align: 'center'},
                     {field: 'state', title: '状态', align: "center"},
-                    {field: 'desc', title: '备注', align: 'center'},
+                    {field: 'desc1', title: '备注', align: 'center'},
                     // {field: 'occurTime', title: '发生时间', align: "center", templet: '#createTime', sort: true},
                     {fixed: 'right', title: "操作", align: "center", toolbar: '#barDemo' + (id + 1), width: 200}
                 ]]

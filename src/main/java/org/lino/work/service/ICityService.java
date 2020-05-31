@@ -24,7 +24,7 @@ public interface ICityService {
 
     public boolean updateLink(CityLink cityExpand);
 
-    public boolean addCity(City city);
+    public boolean addCity(String city);
 
     public boolean addLink(CityLink link);
 

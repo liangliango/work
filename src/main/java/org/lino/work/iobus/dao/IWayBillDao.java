@@ -1,6 +1,8 @@
 package org.lino.work.iobus.dao;
 
 import org.lino.work.base.bean.WayBill;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -16,7 +18,7 @@ public interface IWayBillDao extends JpaRepository<WayBill, String> {
 
     void deleteByBillId(String billId);
 
-    WayBill findByState(String state);
+    Page<WayBill> findByState(String state, Pageable pageable);
 
     @Query("select w from waybill w where w.state = :state")
     List<WayBill> findWayBillByState(String state);

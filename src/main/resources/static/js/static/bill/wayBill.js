@@ -17,15 +17,14 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function (
         elem: '#writeDate',
         value: new Date()
     });
-
     laydate.render({
         elem: '#sendGoodsDate',
         value: new Date()
     });
 
-    let employeeId = $.cookie('loginId');
-    $("#writeBillPerson").val(employeeId);
-    $("#employeeCode").val(employeeId);
+    // let employeeId = $.cookie('loginId');
+    // $("#writeBillPerson").val(employeeId);
+    // $("#employeeCode").val(employeeId);
 
     $.ajax({
         type: "get",
@@ -63,8 +62,8 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function (
             type: 'get',
             url: nginx_url + '/bill/findCustomerByCustomerId/' + data.value,
             success: function (result) {
-                $("#receive").val(result.customerName);
-                $("#receivePhone").val(result.linkmanMobile);
+                $("#reciver").val(result.customerName);
+                $("#reciverPhone").val(result.linkmanMobile);
             }
         });
     });
@@ -74,18 +73,18 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function (
     // $("#addGoodsBill").click(function () {
     form.on('submit(addGoodsBill)', function () {
 
-        $("#goodsBillForm :input").each(function () {
+        $("#wayBill :input").each(function () {
             $(this).removeAttr("disabled");
         });
 
         $.ajax({
             type: "post",
             url: nginx_url + "/bill/addWayBill",
-            data: $("#goodsBillForm").serialize(),
+            data: $("#wayBill").serialize(),
             dataType: "json",
             async: false,
             success: function (result) {
-                if (result.status === "SUCCESS") {
+                if (result === "SUCCESS") {
                     layer.msg('货运单添加成功', {
                         time: 800,
                         icon: 1

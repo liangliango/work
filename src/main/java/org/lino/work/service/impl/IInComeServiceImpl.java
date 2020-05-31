@@ -1,7 +1,8 @@
-package org.lino.work.service;
+package org.lino.work.service.impl;
 
 import org.lino.work.base.bean.Income;
 import org.lino.work.iobus.dao.IIncomeDao;
+import org.lino.work.service.IInComeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -4,13 +4,13 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
         layer = layui.layer,
         table = layui.table;
 
-    form.verify({
-        postcode: function (value, item) {
-            if (!new RegExp("^[0-9]{6}$").test(value)) {
-                return '邮箱格式不正确';
-            }
-        }
-    });
+    // form.verify({
+    //     postcode: function (value, item) {
+    //         if (!new RegExp("^[0-9]{6}$").test(value)) {
+    //             return '邮箱格式不正确';
+    //         }
+    //     }
+    // });
 
 
     element.on('tab(demo)', function (data) {

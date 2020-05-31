@@ -1,17 +1,30 @@
 package org.lino.work.service.impl;
 
+import cn.hutool.crypto.SecureUtil;
+import org.lino.work.base.bean.PageWithGroup;
 import org.lino.work.base.bean.User;
+import org.lino.work.iobus.dao.IPageWithGroupDao;
 import org.lino.work.iobus.dao.IUserDao;
+import org.lino.work.iobus.dao.IUserWithGroupDao;
 import org.lino.work.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+@Service
 public class UserServiceImpl implements IUserService {
 
     @Autowired
     private IUserDao userDao;
+
+    @Autowired
+    private IUserWithGroupDao userWithGroupDao;
+
+    @Autowired
+    private IPageWithGroupDao pageWithGroupDao;
 
     @Override
     public Map<?, ?> userLogin(String loginId, String password) {
@@ -26,17 +39,20 @@ public class UserServiceImpl implements IUserService {
         }
 
         User user = userDao.findByLoginId(loginId);
-        if (user.getPassword() != password){
+
+        System.out.println(user.getPassword()+"    "+SecureUtil.md5(password));
+
+        if (!user.getPassword().equals(SecureUtil.md5(password))){
             System.err.println("密码错误");
             result.put("STATUS", "ERROR");
             return result;
         }
 
-        if (user.isIfOnline()){
-            System.err.println("用户已在线");
-            result.put("STATUS", "ERROR");
-            return result;
-        }
+//        if (user.isIfOnline()){
+//            System.err.println("用户已在线");
+//            result.put("STATUS", "ERROR");
+//            return result;
+//        }
         userDao.updateOnline(true, loginId);
         result.put("STATUS", "SUCCESS");
         result.put("USER", user);
@@ -80,5 +96,11 @@ public class UserServiceImpl implements IUserService {
             e.printStackTrace();
             return "ERROR";
         }
+    }
+
+    @Override
+    public List<PageWithGroup> findPageByLoginId(String loginId) {
+        int groupId = userWithGroupDao.findByUserId(loginId).getGroupId();
+        return pageWithGroupDao.findByGroupId(groupId);
     }
 }

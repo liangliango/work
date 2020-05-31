@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface ICityDao extends JpaRepository<City, Long> {
+public interface ICityDao extends JpaRepository<City, Integer> {
 
     public City findById(int id);
 

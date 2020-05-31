@@ -16,5 +16,5 @@ public interface ICityRouteDao extends JpaRepository<CityRoute, Integer> {
     public List<CityRoute> findByStartStationAndEndStation(String startStation, String endStation);
 
 
-    CityRoute findByRouteIdrouteId();
+    CityRoute findByRouteId(String routeId);
 }

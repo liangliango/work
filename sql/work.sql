@@ -1,11 +1,11 @@
-use manger;
+use work;
 
-insert into `user`(login_id, password) values ('GL123456', 'E10ADC3949BA59ABBE56E057F20F883E');
+insert into `user`(login_id, password) values ('GL123456', 'e10adc3949ba59abbe56e057f20f883e');
 
 insert into `userwithgroup` values (1, 1, 'GL123456');
 
-insert into `group` values
-(1,'对职员用户的增删改查\n2. ','管理组'),
+insert into `group1` values
+(1,'对职员用户的增删改查','管理组'),
 (2,'填写货运单','客户组'),
 (3,'司机组','司机组');
 

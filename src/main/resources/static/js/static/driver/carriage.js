@@ -4,7 +4,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
         laydate = layui.laydate,
         layer = layui.layer,
         table = layui.table;
-    let array1 = ['未到', '已到'];
+    let array1 = ['未到', '已到','已结算'];
 
     refresh(0);
     let login = $.cookie("loginId");
@@ -39,8 +39,9 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
             table.render({
                 elem: '#cargoReceiptTable' + (id + 1),
                 height: 'full-170',
-                url: nginx_url + '/driver/findCarriageByDriverIdAndState',
-                data:{"driverId":login,"state":array1[id]},
+                url: nginx_url + '/driver/findCarriageByDriverIdAndState/'+login+'/'+arr1[id],
+                // data:{"driverId":login,"state":array1[id]},
+                dateFormat: "json",
                 limit: 10,
                 limits: [10],
                 request: {

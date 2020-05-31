@@ -22,7 +22,7 @@ public class ICityRouteServiceImpl implements ICityRouteService {
 
     @Override
     public CityRoute findRouteByRouteId(String routeId) {
-        return cityRouteDao.findByRouteIdrouteId();
+        return cityRouteDao.findByRouteId(routeId);
     }
 
     @Override

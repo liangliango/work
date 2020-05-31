@@ -19,6 +19,11 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
                 let temp_id = '#' + i;
                 $(temp_id).val(item);
             });
+            laydate.render({
+                elem: '#birthday',
+                type: 'date',
+                value: new Date(result.birthday)
+            });
         }
     });
 

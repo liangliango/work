@@ -68,8 +68,8 @@ public class ICarriageServiceImpl implements ICarriageService {
     }
 
     @Override
-    public List<Carriage> findAllCarriageByState(String state) {
-        return carriageDao.findAllByState(state);
+    public Page<Carriage> findAllCarriageByState(String state,Pageable pageable) {
+        return carriageDao.findAllByState(state,pageable);
     }
 
     @Override
@@ -88,6 +88,11 @@ public class ICarriageServiceImpl implements ICarriageService {
             e.printStackTrace();
             return "ERROR";
         }
+    }
+
+    @Override
+    public List<Carriage> findAllCarriageByState(String state) {
+        return carriageDao.findByState(state);
     }
 
 }

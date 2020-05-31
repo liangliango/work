@@ -56,6 +56,11 @@ public class CarriageComtroller {
         return result;
     }
 
+    @RequestMapping(value = "/findAllDriver1",method = RequestMethod.GET)
+    public List<Driver> findAllDriver1(){
+        List<Driver> drivers= driverService.findAllDriver1();
+        return drivers;
+    }
 
     @RequestMapping(value = "/findWayBillByBillId/{billId}",method = RequestMethod.GET)
     public WayBill findWayBillByBillId(@PathVariable("billId")String billId){
@@ -88,8 +93,12 @@ public class CarriageComtroller {
     }
 
     @RequestMapping(value = "/findAllCarriageByState/{state}",method = RequestMethod.GET)
-    public List<Carriage> findAllCarriageByState(@PathVariable("state")String state){
-        return carriageService.findAllCarriageByState(state);
+    public Result findAllCarriageByState(@PathVariable("state")String state,@RequestParam("pageNum") int pageNum, @RequestParam("limit") int limit){
+        System.out.println(state);
+        Pageable pageable = PageRequest.of(pageNum - 1, limit);
+        Page<Carriage> page = carriageService.findAllCarriageByState(state,pageable);
+        Result result = new Result(200, "SUCCESS", (int) page.getTotalElements(), page.getContent());
+        return result;
     }
 
 
@@ -101,7 +110,7 @@ public class CarriageComtroller {
         return result;
     }
 
-    @RequestMapping(value = "/updateCarriage",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/updateCarriage",method = RequestMethod.PUT)
     public String updateCarriage(Carriage carriage){
         return carriageService.updateCarriage(carriage);
     }

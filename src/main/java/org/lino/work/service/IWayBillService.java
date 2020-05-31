@@ -1,6 +1,8 @@
 package org.lino.work.service;
 
 import org.lino.work.base.bean.WayBill;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -12,9 +14,9 @@ public interface IWayBillService {
 
     boolean deleteWayBillByBillId(String billId);
 
-    WayBill findWayBillbyState(String state);
+    org.springframework.data.domain.Page<WayBill> findWayBillbyState(String state, Pageable pageable);
 
-    List<WayBill> findAllWayBill();
+    Page<WayBill> findAllWayBill(Pageable pageable);
 
     boolean addWayBIll(WayBill waybill);
 

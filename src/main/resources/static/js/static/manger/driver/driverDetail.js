@@ -25,11 +25,11 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
                 value: new Date(result.birthday)
             });
             if (result.isCompany === true) {
-                $("isCompany").val("是");
+                $("#isCompany").val("是");
             }else{
-                $("isCompany").val("否");
+                $("#isCompany").val("否");
             }
-            form.render('checkbox');
+            form.render();
         }
     })
 });

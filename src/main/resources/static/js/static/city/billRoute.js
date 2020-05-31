@@ -1,7 +1,5 @@
 let range_dot = ['', 'layui-bg-orange', 'layui-bg-green', 'layui-bg-cyan', 'layui-bg-blue', 'layui-bg-black', 'layui-bg-gray'];
-
 layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'],function () {
-
     let element = layui.element,
         form = layui.form,
         laydate = layui.laydate,
@@ -14,37 +12,79 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'],function ()
         value: new Date()
     });
     $.ajax({
-        type: get,
-        url:nginx_url+'/city/findAllCity',
+        type: 'get',
+        url: nginx_url + '/city/findAllCarriageByState',
         dataType: 'json',
-        success:function (result) {
-            $.each(result,function (i,item) {
-                let option = '<option value="'+item.city+'">'+item.city+'</option>';
-                    $("#start").append(option);
-                    $("#end").append(option);
-            })
-        }
-    })
-
-    $.ajax({
-        type:get,
-        url:nginx_url+'/city/findRouteByStartAndEnd',
-        data:{satrtStation:$("#start").val(),endStation:$("#end").val()},
-        dataType:'json',
-        success:function (result) {
+        async: false,
+        success: function (result) {
             console.log(result);
-            let rand = 0;
-            $("#now").val($("#start").val());
             $.each(result, function (i, item) {
-                let option = '<option value="'+item.routeId+'">'+item.routeId+'</option>';
-                $("#routeId").append(option);
-            }
-        );
+                let option = '<option value="' + item.carriageId + '">';
+                option += item.carriageId;
+                option += '</option>';
+                $("#billId").append(option);
+            });
+            form.render('select');
         }
-    })
+    });
+    $.ajax({
+        type: 'get',
+        url: nginx_url + '/city/findAllCity',
+        dataType: 'json',
+        async: false,
+        success: function (result) {
+            $.each(result, function (i, item) {
+                let option = '<option value="' + item.city + '">';
+                option += item.city;
+                option += '</option>';
+                $("#start").append(option);
+                $("#end").append(option);
+            });
+            form.render('select');
+        }
+    });
+
+    // form.render('select');
+    // form.on('select(changeSend3)', function (data) {
+    //     alert("kkkkk");
+    //     console.log(data);
+    //     // ajax
+    //     // $.ajax({
+    //     //     type: 'get',
+    //     //     url: nginx_url + '/bill/findCustomerByCustomerId/' + data.value,
+    //     //     success: function (result) {
+    //     //         $("#reciver").val(result.customerName);
+    //     //         $("#reciverPhone").val(result.linkmanMobile);
+    //     //     }
+    //     // });
+    // });
+    form.on('select(changeSend3)', function (data) {
+        // ajax
+        $.ajax({
+            type: 'get',
+            url:nginx_url+'/city/findRouteByStartAndEnd',
+            data:{"start":$("#start").val(),"end":$("#end").val()},
+            success:function (result) {
+                console.log(result);
+                let rand = 0;
+                $("#now").val($("#start").val());
+                $.each(result, function (i, item) {
+                    console.log(item.routeId);
+                        // let option = '<option value="'+item.routeId+'">'+item.routeId+'</option>';
+                    let option = "<option value='" + item.routeId + "'>";
+                    option += item.routeId;
+                    option += "</option>"
+                        $("#routeId").append(option);
+                    }
+                );
+                form.render('select');
+            }
+        });
+    });
+
     form.on('select(changeSend)',function (data) {
         $.ajax({
-            type:get,
+            type:'get',
             url:nginx_url+'/city/findRouteByRouteId'+data.val(),
             success:function (result) {
                 let content = '<div class="layui-row layui-col-space15">' +
@@ -74,13 +114,13 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'],function ()
                 $("#routeInfo").append(content);
             }
         })
-    })
+    });
 
     form.on('submit(addBillRoute)',function () {
         $.ajax({
             type:"post",
             url:nginx_url+'/city/addBillRoute',
-            data: $("#addBillROute").serialize(),
+            data: $("#billRouteForm").serialize(),
             dataType:"json",
             success: function (result) {
                 if (result.status === "SUCCESS") {
@@ -98,6 +138,5 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'],function ()
                 console.log(result);
             }
         })
-
-    })
+    });
 })

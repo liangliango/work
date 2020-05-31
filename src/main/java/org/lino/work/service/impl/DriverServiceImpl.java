@@ -33,11 +33,14 @@ public class DriverServiceImpl implements IDriverService {
     @Autowired
     private IDriverClearDao driverClearDao;
 
+    @Autowired
+    IUserWithGroupDao userWithGroupDao;
     @Override
     public Page<Driver> findAllByPage(Pageable pageable) {
         return driverDao.findAll(pageable);
     }
 
+    @Transactional
     @Override
     public boolean addNewDriver(Driver driverInfo) {
 
@@ -50,6 +53,10 @@ public class DriverServiceImpl implements IDriverService {
             String pwd = SecureUtil.md5("123456");
             user.setPassword(pwd);
             userDao.save(user);
+            UserWithGroup userWithGroup = new UserWithGroup();
+            userWithGroup.setGroupId(3);
+            userWithGroup.setUserId(id);
+            userWithGroupDao.save(userWithGroup);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -146,7 +153,8 @@ public class DriverServiceImpl implements IDriverService {
 
         try {
             driverDao.deleteByDriverId(driverId);
-
+            userWithGroupDao.deleteByUserId(driverId);
+            userDao.deleteByLoginId(driverId);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -167,6 +175,11 @@ public class DriverServiceImpl implements IDriverService {
             e.printStackTrace();
             return "ERROR";
         }
+    }
+
+    @Override
+    public List<Driver> findAllDriver1() {
+        return driverDao.findAll();
     }
 
 }

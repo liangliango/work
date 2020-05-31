@@ -63,10 +63,10 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
                 cellMinWidth: 80,
                 cols: [[
                     {title: 'id', fixed: 'left', sort: true, type: 'numbers', align: 'center'},
-                    {field: 'customerId', title: '员工编号', align: 'center'},
-                    {field: 'driverName', title: '员工姓名', align: 'center'},
+                    {field: 'employeeId', title: '员工编号', align: 'center',sort: true},
+                    {field: 'employeeName', title: '员工姓名', align: 'center'},
                     {field: 'phone', title: '电话', align: 'center'},
-                    {field: 'carNo', title: '性别', align: 'center'},
+                    {field: 'gender', title: '性别', align: 'center'},
                     {fixed: 'right', title: "操作", align: "center", toolbar: '#barDemo', width: 200}
                 ]]
             });
@@ -75,42 +75,29 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
             table.on('tool(driverTool)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
                 let data = obj.data; //获得当前行数据
                 let layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-
+                let tr = obj.tr; //获得当前行 tr 的DOM对象
                 if (layEvent === 'del') { //删除
-                    layer.confirm('是否删除', function () {
-                        // obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-                        // layer.close(index);
+                    layer.confirm('是否删除', function (index) {
+                        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                        layer.close(index);
                         //向服务端发送删除指令
                         $.ajax({
                             type: "DELETE",
                             url: nginx_url + "/manger/deleteEmployeeByEmployeeId/" + data.employeeId,
-                            async: false,
-                            dataType: 'json',
                             success: function (result) {
                                 console.log(result);
-                                if (result === 'SUCCESS') {
-                                    layer.msg('删除成功', {
-                                        time: 800,
-                                        icon: 1
-                                    });
-                                } else {
-                                    layer.msg('删除失败', {
-                                        time: 800,
-                                        icon: 5
-                                    });
-                                }
                             }
                         });
-                        table.reload('driverTable', {
-                            url: nginx_url + '/manger/findAllEmployeeByPage'
-                        });
+                        layer.msg('删除成功', {
+                            time: 800
+                        })
                     });
 
                 } else if (layEvent === 'edit') { //编辑
                     layer.open({
                         type: 2,
-                        title: '员工 - ' + data.id + '信息修改',
-                        content: ['employeeModify.html?employeeId=' + data.employeeId, 'no'],
+                        title: '员工 - ' + data.employeeId + '信息修改',
+                        content: ['employeeModify.html?employeeId=' + data.employeeId],
                         area: ['95%', '95%'],
                         shadeClose: true,
                         move: false,
@@ -123,7 +110,7 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
                 } else if (layEvent === 'detail') {
                     layer.open({
                         type: 2,
-                        title: '员工 - ' + data.id + ' 信息详情',
+                        title: '员工 - ' + data.employeeId + ' 信息详情',
                         content: ['employeeDetail.html?employeeId=' + data.employeeId, 'no'],
                         area: ['95%', '95%'],
                         shadeClose: true,

@@ -7,12 +7,7 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
         $ = layui.jquery;
 
     let billId = window.location.href.split("=")[1];
-    laydate.render({
-        elem: '#writeDate',
-        type: 'date',
-        value: new Date()
-        // theme: 'grid'
-    });
+
     $.ajax({
         type: "get",
         url: nginx_url + "/bill/findWayBillByBillId/" + billId,
@@ -35,6 +30,12 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
                 elem: '#exceptDate',
                 type: 'date',
                 value: new Date(result.exceptDate)
+                // theme: 'grid'
+            });
+            laydate.render({
+                elem: '#writeDate',
+                type: 'date',
+                value: new Date()
                 // theme: 'grid'
             });
             laydate.render({

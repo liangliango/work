@@ -72,4 +72,6 @@ public interface IDriverService {
     boolean deleteDriverByDriverId(String driverId);
 
     String updateDriverByDriverId(String driverId, Driver driver);
+
+    List<Driver> findAllDriver1();
 }

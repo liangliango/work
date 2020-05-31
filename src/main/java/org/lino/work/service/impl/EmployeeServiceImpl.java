@@ -77,8 +77,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
     public boolean deleteEmployeeByEmployeeId(String employeeId) {
 
         try {
+            System.out.println(employeeId);
             Employee employee = employeeDao.findByEmployeeId(employeeId);
-
             employeeDao.delete(employee);
             return true;
         } catch (Exception e) {

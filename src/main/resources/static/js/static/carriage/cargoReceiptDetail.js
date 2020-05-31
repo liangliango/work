@@ -78,9 +78,8 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
             table.render({
                 elem: '#cargoReceiptTable' + (id + 1),
                 height: 'full-170',
-
-                url: nginx_url + '/carriage/findAllCarriageByState' + array[i],
-
+                url: nginx_url + '/carriage/findAllCarriageByState/' + array[id],
+                datatype:"json",
                 limit: 10,
                 limits: [10],
                 request: {
@@ -100,7 +99,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
                     {title: 'ID', fixed: 'left', type: 'numbers', align: 'center'},
                     {field: 'carriageId', title: '运输合同编号', align: 'center'},
                     {field: 'state', title: '状态', align: "center"},
-                    {field: 'receivePhone', title: '收货联系人', align: 'center'},
+                    {field: 'reciverPhone', title: '收货联系人', align: 'center'},
                     {fixed: 'right', title: "操作", align: "center", toolbar: '#barDemo' + (id + 1), width: 200}
                 ]]
             });

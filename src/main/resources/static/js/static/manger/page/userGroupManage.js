@@ -85,7 +85,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
             groupId.append('<option value="">请选择用户组</option>');
             $.ajax({
                 type: 'get',
-                url: nginx_url + '/manger/findAllUserGroup',
+                url: nginx_url + '/manger/findAllGroup',
                 dataType: 'json',
                 async: false,
                 success: function (result) {
@@ -102,7 +102,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
             check.empty();
             $.ajax({
                 type: 'get',
-                url: nginx_url + '/findAllPage',
+                url: nginx_url + '/manger/findAllPage',
                 dataType: 'json',
                 async: false,
                 success: function (result) {
@@ -117,24 +117,24 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
 
             form.on('select(changeGroup)', function (data) {
 
-                for (let i = 1; i < 13; i++) {
+                for (let i = 1; i < 9; i++) {
                     $("#" + i).removeAttr('checked');
                 }
                 form.render();
                 $.ajax({
                     type: 'get',
-                    url: nginx_url + '/manger/findPageByGroup/' + data.value,
+                    url: nginx_url + '/manger/findPageByGroupId/' + data.value,
                     dataType: 'json',
                     async: false,
                     success: function (result) {
                         console.log(result);
                         $.each(result, function (i, item) {
-                            let itemId = '#' + item.functionId;
+                            let itemId = '#' + item.pageId;
                             $(itemId).attr('checked', 'checked');
                         })
+                        form.render('checkbox');
                     }
                 });
-                form.render();
             });
         }
     });
@@ -175,9 +175,8 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
         console.log(array);
         $.ajax({
             type: 'post',
-            url: nginx_url + '/manger/addNewPage',
+            url: nginx_url + '/manger/addPageWithGroup/'+$("#groupId").val(),
             data: {
-                'groupId': $("#groupId").val(),
                 'array': array
             },
             dataType: 'json',

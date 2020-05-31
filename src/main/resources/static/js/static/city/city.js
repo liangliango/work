@@ -1,39 +1,20 @@
 let cityArray = [];
 let pass_station = [];
 let cityId;
-let number1;
+let number1 = 0;
 let range_dot = ['', 'layui-bg-orange', 'layui-bg-green', 'layui-bg-cyan', 'layui-bg-blue', 'layui-bg-black', 'layui-bg-gray'];
 //获取所有城市信息（id + cityName）
-$.ajax({
-    type: 'get',
-    url: nginx_url + '/city/findAllCity',
-    dataType: 'json',
-    async: false,
-    success: function (result) {
-        let index = 1;
-        $.each(result, function (i, item) {
-                let option = '<option value="' + item.city + '">';
-                option += item.city;
-                option += '</option>';
-                $("startStation").append(option);
-                $("passStation").append(option);
-                $("endStation").append(option);
-                cityArray.push(item.city);
-            });
-            form.render('select');
-        }
-});
+
 layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function () {
     let element = layui.element,
         form = layui.form,
         layer = layui.layer,
-        table = layui.table,
-        $ = layui.jquery;
+        table = layui.table;
     form.on('submit(add)', function () {
         $.ajax({
-            type: "get",
+            type: "post",
             url: nginx_url + "/city/addCity",
-            data: $("#addCity").serialize(),
+            data: {'city':$("#city").val()},
             dataType: "json",
             async: false,
             success: function (result) {
@@ -48,14 +29,14 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function (
         return false;
     })
     form.on('submit(addLink)', function () {
-        let cityId = $("#city").val();
+        let cityId = $("#cityId").val();
         let linkCity = $("#linkCity").val();
         $.ajax({
             type: 'post',
-            url: nginx_url + '/route/addCityLink',
+            url: nginx_url + '/city/addCityLink',
             data: {
                 'cityId': cityId,
-                'linkCity': linkCity
+                'linkCity': linkCity,
             },
             dataType: 'json',
             success: function (result) {
@@ -79,25 +60,26 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function (
     form.on('submit(addRoute)', function () {
         let startStation = $("#startStation").val();
         console.log("startStation: " + startStation);
-        console.log("passStation: " + pass_station.toString());
+        console.log("passStation: " + pass_station.join(","));
+        console.log("endStation: " + $("#endStation").val());
         $.ajax({
             type: 'post',
-            url: nginx_url + '/route/addCityRoute',
+            url: nginx_url + '/city/addCityRoute/'+$("#fetchTime").val(),
             data: {
                 'startStation': startStation,
-                'passStation': pass_station.toString(),
-                'endStation': $("#endStation").val,
-                'distance': $("#distance").val(),
-                'fetchTime': $("#fetchTime").val()
+                'passStation': pass_station.join(","),
+                'endStation': $("#endStation").val(),
+                'distance': $("#distance").val()
             },
             dataType: 'json',
+            async: false,
             success: function (result) {
                 if (result === 'SUCCESS') {
                     layer.msg('添加成功', {
                         time: 800,
                         icon: 1
                     });
-                    $("#resetForm").click();
+                    // $("#resetForm3").click();
                 } else {
                     layer.msg('添加失败', {
                         time: 800,
@@ -109,26 +91,62 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function (
         return false;
     });
 
-    element.on('tab(demo)')
+    element.on('tab(demo)',function (data) {
+        pass_station=[];
+    if (data.index===1){
+        $.ajax({
+            type: 'get',
+            url: nginx_url + '/city/findAllCity',
+            dataType: 'json',
+            async: false,
+            success: function (result) {
+                $.each(result, function (i, item) {
+                    let option = '<option value="' + item.id + '">';
+                    option += item.city;
+                    option += '</option>';
+                    $("#cityId").append(option);
+                    $("#linkCity").append(option);
+                });
+                form.render('select');
+            }
+        });
+    }
+        if (data.index===2){
+            $.ajax({
+                type: 'get',
+                url: nginx_url + '/city/findAllCity',
+                dataType: 'json',
+                async: false,
+                success: function (result) {
+                    $.each(result, function (i, item) {
+                        let option = '<option value="' + item.city + '">';
+                        option += item.city;
+                        option += '</option>';
+                        $("#startStation").append(option);
+                        $("#passStation").append(option);
+                        $("#endStation").append(option);
+                    });
+                    form.render('select');
+                }
+            });
 
+        }
+
+
+    })
     form.on('select(changeRange)', function (data) {
-        addPass(data);
-        number1++;
-        let content = "<button type='button' class='layui-btn layui-btn-sm' id='city-" + number1 + "' onclick='removeSpan(" + number1 + ")'>";
-        content += pass_station[number1 - 1];
+        console.log(data);
+        console.log(data.value);
+        addPass(data.value);
+        // number1=number1+1;
+        let content = "<button type='button' class='layui-btn layui-btn-sm' id='city-" +  + "' onclick='removeSpan(" + number1 + ")'>";
+        content += data.value;
         content += "<span class='layui-badge layui-bg-gray' style='font-size: 4px; line-height: 16px; height: 16px'>X</span></button>";
 
         $("#selectedCity2").append(content);
         form.render('select');
 
-    });
-
-
-
-    $("#resetForm").click(function () {
-        $("#selectedCity").empty();
-    });
-
+    })
 })
     function format(id) {
         let array = ('' + id).split(',');
@@ -149,6 +167,6 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function (
         $(buttonId).remove();
     }
 
-    function addPass(passStation) {
-        pass_station.push(passStation);
+    function addPass(passStation1) {
+        pass_station.push(passStation1);
     }

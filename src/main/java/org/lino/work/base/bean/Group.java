@@ -14,7 +14,8 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "group")
+@Entity
+@Table(name = "group1")
 public class Group {
 
     @Id
@@ -25,6 +26,6 @@ public class Group {
     private String groupName;// 组名
 
     @Column(length = 50)
-    private String desc;// 描述
+    private String desc1;// 描述
 
 }

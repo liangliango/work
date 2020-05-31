@@ -157,7 +157,7 @@
                             <div class="layui-input-inline">
 <!--                                <input type="checkbox" lay-skin="switch" id="switchValue" lay-filter="checkCondition"-->
 <!--                                       lay-text="是|否">-->
-                                <select id="isCompany">
+                                <select id="isCompany" lay-fither="companyCar">
                                     <option value="0">否</option>
                                     <option value="1">是</option>
                                 </select>
@@ -176,7 +176,7 @@
             </div>
         </div>
         <div class="layui-tab-item">
-            <table id="driverTable" lay-filter="driverTool" lay-data="{id: 'driverTable'}"></table>
+            <table id="driverTable" lay-filter="driverTool"></table>
             <script type="text/html" id="barDemo">
                 <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="detail">查看详情</a>
                 <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>

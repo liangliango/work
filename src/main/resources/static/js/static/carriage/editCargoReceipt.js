@@ -10,14 +10,20 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
         elem: '#writeDate',
         value: new Date()
     });
+    laydate.render({
+        elem: '#startDate',
+        value: new Date()
+    });
     $.ajax({
         type: "get",
         url: nginx_url + "/carriage/findWayBillByState1",
         async: false,
         success: function (result) {
+
             $.each(result, function (i, item) {
-                let option = "<option value='" + item + "'>";
-                option += item;
+                console.log(item.billId);
+                let option = "<option value='" + item.billId + "'>";
+                option += item.billId;
                 option += "</option>";
                 $("#billId").append(option);
                 form.render('select');
@@ -44,14 +50,15 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
 
     $.ajax({
         type: 'get',
-        url: nginx_url + '/carriage/findAllDriver',
+        url: nginx_url + '/carriage/findAllDriver1',
         dataType: 'json',
         async: false,
         success: function (result) {
             console.log(result);
             $.each(result, function (i, item) {
-                let option = '<option value="' + item + '">';
-                option += item;
+                console.log(item.driverId);
+                let option = '<option value="' + item.driverId + '">';
+                option += item.driverId;
                 option += '</option>';
                 $("#driverId").append(option);
             });
@@ -68,9 +75,14 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
                 $("#billName").val(result.billName);
                 $("#send").val(result.send);
                 $("#sendPhone").val(result.sendPhone);
-                $("#receive").val(result.receive);
-                $("#receivePhone").val(result.receivePhone);
-                $("#exceptDate").val(result.exceptDate);
+                $("#reciver").val(result.reciver);
+                $("#reciverPhone").val(result.reciverPhone);
+                laydate.render({
+                    elem: '#exceptDate',
+                    type: 'date',
+                    value: new Date(result.exceptDate)
+                    // theme: 'grid'
+                });
             }
         });
     });
@@ -82,10 +94,11 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
             success: function (result) {
                 $("#driverName").val(result.driverName);
                 $("#phone").val(result.phone);
-                if(result.isCompany===0){
+                console.log(result);
+                if(!result.company){
                     $("#isCompany").val("否");
                 }
-                if(result.isCompany===1){
+                else {
                     $("#isCompany").val("是");
                 }
             }

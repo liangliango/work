@@ -1,8 +1,6 @@
 package org.lino.work.busi.controller;
 
-import org.lino.work.base.bean.Customer;
-import org.lino.work.base.bean.Driver;
-import org.lino.work.base.bean.Employee;
+import org.lino.work.base.bean.*;
 import org.lino.work.base.util.Result;
 import org.lino.work.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +8,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @CrossOrigin
 @RequestMapping(value = "/manger")
@@ -28,6 +31,15 @@ public class MangerController {
 
     @Autowired
     IUserService userService;
+
+    @Autowired
+    IGroupService groupService;
+
+    @Autowired
+    IPageService pageService;
+
+    @Autowired
+    IPageWithGroupService pageWithGroupService;
 
     @RequestMapping(value = "/findAllCusomer",method = RequestMethod.GET)
     public Result findAllCusomer(@RequestParam("pageNum") int pageNum, @RequestParam("limit") int limit){
@@ -103,8 +115,6 @@ public class MangerController {
         }else {
             return "ERROR";
         }
-
-
     }
 
     @RequestMapping("/findDriverByDriverId/{driverId}")
@@ -174,7 +184,55 @@ public class MangerController {
 
     }
 
+    @RequestMapping(value = "/findAllGroupByPage",method = RequestMethod.GET)
+    public Result findAllGroupByPage(@RequestParam("pageNum") int pageNum, @RequestParam("limit") int limit){
+
+        Pageable pageable = PageRequest.of(pageNum - 1, limit);
+        Page<Group> page = groupService.findAllGroupByPage(pageable);
+        Result result = new Result(200, "SUCCESS", (int) page.getTotalElements(), page.getContent());
+        return result;
+    }
+
+    @RequestMapping(value = "/deleteGroup/{id}",method = RequestMethod.DELETE)
+    public String deleteGroupById(@PathVariable("id") int id){
+
+        boolean b = groupService.deleteGroupById(id);
+        if (b){
+            return "SUCCESS";
+        }else {
+            return "ERROR";
+        }
 
 
+    }
 
+    @RequestMapping(value = "/findAllGroup",method = RequestMethod.GET)
+    public List<Group> findAllGroup(){
+        return groupService.findAllGroup();
+    }
+
+    @RequestMapping(value = "/findAllPage",method = RequestMethod.GET)
+    public List<org.lino.work.base.bean.Page> findAllPage(){
+        return pageService.findAllPage();
+    }
+
+    @RequestMapping(value = "/findPageByGroupId/{groupId}",method = RequestMethod.GET)
+    public List<PageWithGroup> findPageByGroupId(@PathVariable("groupId" )int groupId){
+        return pageWithGroupService.findPageByGroupId(groupId);
+    }
+
+    @RequestMapping(value = "/addPageWithGroup/{groupId}",method = RequestMethod.POST)
+    public String addPageWithGroup(@PathVariable int groupId, HttpServletRequest req){
+
+        String[] arr = req.getParameterValues("array[]");
+        int[] arr1 = new int[arr.length];
+        int i =0;
+        for (String s : arr
+                ) {
+            arr1[i++] = Integer.parseInt(s);
+        }
+        System.out.println(groupId);
+        System.out.println(Arrays.toString(arr));
+        return pageWithGroupService.addPageWithGroup(groupId,arr1);
+    }
 }

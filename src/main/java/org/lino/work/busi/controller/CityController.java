@@ -1,17 +1,16 @@
 package org.lino.work.busi.controller;
 
 import io.swagger.annotations.Api;
-import org.lino.work.base.bean.BillRoute;
-import org.lino.work.base.bean.City;
-import org.lino.work.base.bean.CityRoute;
-import org.lino.work.base.bean.Driver;
-import org.lino.work.service.IBillRouteService;
-import org.lino.work.service.ICityLinkService;
-import org.lino.work.service.ICityRouteService;
-import org.lino.work.service.ICityService;
+import org.lino.work.base.bean.*;
+import org.lino.work.base.util.Result;
+import org.lino.work.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @CrossOrigin
@@ -32,13 +31,17 @@ public class CityController {
     @Autowired
     ICityLinkService cityLinkService;
 
+    @Autowired
+    ICarriageService carriageService;
+
     @RequestMapping(value = "/findAllCity",method = RequestMethod.GET)
     public List<City> findAllCity(){
         return cityService.findAllCity();
     }
 
     @RequestMapping(value = "/findRouteByStartAndEnd",method = RequestMethod.GET)
-    public List<CityRoute> findRouteByStartAndEnd(@PathVariable("start") String start,@PathVariable("end")String end){
+    public List<CityRoute> findRouteByStartAndEnd(String start,String end){
+        System.out.println(start+"------>"+end);
         return cityRouteService.findRouteByStartAndEnd(start,end);
     }
 
@@ -54,7 +57,8 @@ public class CityController {
     }
 
     @RequestMapping(value = "/addCity",method = RequestMethod.POST)
-    public String addCity(City city){
+    public String addCity(String city){
+        System.out.println(city);
         boolean b = cityService.addCity(city);
         if (b==true){
             return "SUCCESS";
@@ -63,8 +67,9 @@ public class CityController {
         }
     }
 
-    @RequestMapping(value = "/addCityRoute",method = RequestMethod.POST)
-    public String addCityRoute(CityRoute cityRoute){
+    @RequestMapping(value = "/addCityRoute/{fetchTime}",method = RequestMethod.POST)
+    public String addCityRoute(CityRoute cityRoute,@PathVariable String fetchTime){
+        cityRoute.setFetchTime(Double.parseDouble(fetchTime));
         boolean b = cityRouteService.addCityRoute(cityRoute);
         if (b==true){
             return "SUCCESS";
@@ -73,8 +78,10 @@ public class CityController {
         }
     }
     @RequestMapping(value = "/addCityLink",method = RequestMethod.POST)
-    public String addCityLink(@PathVariable("cityId") int cityId,@PathVariable("cityLink") int cityLink){
-        boolean b = cityLinkService.addCityLink(cityId,cityLink);
+    public String addCityLink(String cityId,String linkCity){
+
+        System.out.println(cityId+"    "+linkCity);
+        boolean b = cityLinkService.addCityLink(Integer.parseInt(cityId),Integer.parseInt(linkCity));
         if (b==true){
             return "SUCCESS";
         }else {
@@ -84,11 +91,22 @@ public class CityController {
 
     @RequestMapping(value = "/findCityRouteByStartAndEnd",method = RequestMethod.GET)
     public List<CityRoute> findCityRouteByStartAndEnd(String startStation,String endStation){
+        System.out.println(startStation+"------>"+endStation);
         return cityRouteService.findCityRouteByStartAndEnd(startStation,endStation);
     }
 
     @RequestMapping(value = "/findAllCityRoute",method = RequestMethod.GET)
     public List<CityRoute> findAllCityRoute(){
         return cityRouteService.findAllCityRoute();
+    }
+
+
+
+    @RequestMapping(value = "/findAllCarriageByState",method = RequestMethod.GET)
+    public List<Carriage> findAllCarriageByState1(){
+        String state= "未到";
+        System.out.println(state);
+        List<Carriage> page = carriageService.findAllCarriageByState(state);
+        return page;
     }
 }

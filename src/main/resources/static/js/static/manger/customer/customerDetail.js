@@ -18,7 +18,7 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
             $("#linkmanMobile").val(result.linkmanMobile);
             $("#customerType").val(result.customerType);
             $("#email").val(result.email);
-            $("#idCard").val(result.idCard);
+            $("#idcard").val(result.idcard);
         }
     });
 

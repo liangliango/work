@@ -7,13 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 
-public interface ICustomerDao extends JpaRepository<Customer, Long> {
+public interface ICustomerDao extends JpaRepository<Customer, String> {
 
     public Customer findByCustomerId(String customerId);
 
     @Query(value = "select customerId from customer")
     public List<String> findAllCustomerId();
 
-    public boolean deleteByCustomerId(String customerId);
+    public void deleteByCustomerId(String customerId);
 
 }

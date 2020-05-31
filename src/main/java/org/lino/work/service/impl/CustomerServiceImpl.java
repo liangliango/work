@@ -2,10 +2,7 @@ package org.lino.work.service.impl;
 
 import cn.hutool.crypto.SecureUtil;
 import org.lino.work.base.bean.*;
-import org.lino.work.iobus.dao.ICustomerClearDao;
-import org.lino.work.iobus.dao.ICustomerDao;
-import org.lino.work.iobus.dao.IUserDao;
-import org.lino.work.iobus.dao.IWayBillDao;
+import org.lino.work.iobus.dao.*;
 import org.lino.work.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,6 +32,10 @@ public class CustomerServiceImpl implements ICustomerService {
     @Autowired
     private ICustomerClearDao customerClearDao;
 
+    @Autowired
+    IUserWithGroupDao userWithGroupDao;
+
+    @Transactional
     @Override
     public boolean save(Customer customer) {
 
@@ -47,6 +48,10 @@ public class CustomerServiceImpl implements ICustomerService {
             user.setPassword(pwd);
             user.setLoginId(customer.getCustomerId());
             userDao.save(user);
+            UserWithGroup userWithGroup = new UserWithGroup();
+            userWithGroup.setUserId(id);
+            userWithGroup.setGroupId(2);
+            userWithGroupDao.save(userWithGroup);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,6 +64,8 @@ public class CustomerServiceImpl implements ICustomerService {
     public boolean delete(String customerId) {
         try {
             customerDao.deleteByCustomerId(customerId);
+            userWithGroupDao.deleteByUserId(customerId);
+            userDao.deleteByLoginId(customerId);
             return true;
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().isRollbackOnly();
@@ -105,7 +112,7 @@ public class CustomerServiceImpl implements ICustomerService {
 
         try {
             CustomerClear customerClear = new CustomerClear();
-            customerClear.setCustomerId(wayBill.getPayCusomer());
+            customerClear.setCustomerId(wayBill.getPayCustomer());
             customerClear.setFreight(wayBill.getFreight());
             customerClear.setInsurance(wayBill.getInsurance());
             customerClear.setIsClear(false);

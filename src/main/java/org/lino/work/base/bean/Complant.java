@@ -10,8 +10,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "complant")
+@Entity(name = "complant")
 public class Complant {
 
     @Id
@@ -25,8 +24,7 @@ public class Complant {
     private String driverId;
 
     @Column(length = 50)
-    private String desc;
+    private String desc1;
 
-    @Column(length = 50)
     private double money;
 }

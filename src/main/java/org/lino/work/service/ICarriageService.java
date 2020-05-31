@@ -26,9 +26,11 @@ public interface ICarriageService {
 
     String deleteCarriageByCarriageId(String carriageId);
 
-    List<Carriage> findAllCarriageByState(String state);
+    Page<Carriage> findAllCarriageByState(String state,Pageable pageable);
 
     Page<Carriage> findAllCarriage(Pageable pageable);
 
     String updateCarriage(Carriage carriage);
+
+    List<Carriage> findAllCarriageByState(String state);
 }

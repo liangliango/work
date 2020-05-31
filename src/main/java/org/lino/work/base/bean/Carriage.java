@@ -6,13 +6,12 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "carriage")
+@Entity(name = "carriage")
 public class Carriage {
 
     @Id

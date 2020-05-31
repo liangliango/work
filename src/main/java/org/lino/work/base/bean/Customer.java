@@ -49,6 +49,6 @@ public class Customer {
     private String businessLicenSe;
 
     @Column(length = 50)
-    private String idCard;
+    private String idcard;
 
 }
