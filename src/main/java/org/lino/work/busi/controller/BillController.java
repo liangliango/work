@@ -46,6 +46,15 @@ public class BillController {
         }
         return ReturnType.ERROR;
     }
+    @RequestMapping(value = "/updateWayBillByBillId1/{billId}",method = RequestMethod.PUT)
+    public String updateWayBillByBillId1(@PathVariable("billId")String billId){
+
+        boolean b = wayBillService.updateWayBillByBillId1(billId);
+        if (b == true){
+            return ReturnType.SUCCESS;
+        }
+        return ReturnType.ERROR;
+    }
 
     @RequestMapping(value = "/deleteWayBillByBillId/{billId}",method = RequestMethod.DELETE)
     public String deleteWayBillByBillId(@PathVariable("billId")String billId){

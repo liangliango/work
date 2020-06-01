@@ -1,3 +1,4 @@
+let billId = window.location.href.split("=")[1];
 layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function () {
     let element = layui.element,
         form = layui.form,
@@ -6,13 +7,14 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
         table = layui.table,
         $ = layui.jquery;
 
-    let billId = window.location.href.split("=")[1];
+
     laydate.render({
         elem: '#clearDate',
         type: 'date',
         value: new Date()
         // theme: 'grid'
     });
+    console.log(billId);
     $.ajax({
         type: "get",
         url: nginx_url + "/carriage/findCarriageByCarriageId/" + billId,
@@ -47,16 +49,16 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
         }
     });
 
-    form.on('submit(modifyGoodsBill)', function () {
-
+    form.on('submit(update)', function () {
+        console.log(billId);
         $("#goodsBillForm :input").each(function () {
             $(this).removeAttr("disabled");
         });
         $("#state").removeAttr("disabled");
         $.ajax({
             type: 'put',
-            url: nginx_url + '/bill/updateWayBillByBillId/' + billId,
-            data: $("#goodsBillForm").serialize(),
+            url: nginx_url + '/carriage/updateWayBillByBillId1/' + billId,
+            data: $("#cargoReceiptForm").serialize(),
             dataType: "json",
             success: function (result) {
                 console.log(result);

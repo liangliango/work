@@ -18,4 +18,10 @@ public interface ICarriageDao extends JpaRepository<Carriage, Long> {
     Page<Carriage> findAllByState(String state, Pageable pageable);
 
     List<Carriage> findByState(String state);
+
+    Page<Carriage> findAllByDriverIdAndState(String driverId, String state, Pageable pageable);
+
+    Page<Carriage> findAllByDriverId(String driverId, Pageable pageable);
+
+    List<Carriage> findAllByState(String state);
 }

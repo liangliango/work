@@ -7,7 +7,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
 
     $.ajax({
         type: "get",
-        url: nginx_url + "/findAllEmployeeId",
+        url: nginx_url + "/income/findAllEmployeeId",
         async: false,
         success: function (result) {
             $.each(result, function (i, item) {

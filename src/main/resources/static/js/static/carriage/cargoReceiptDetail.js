@@ -57,7 +57,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
             layer.open({
                 type: 2,
                 title: '运输合同详细信息',
-                content: ['showDetail.html?carriageId=' + data.carriageId],
+                content: ['carriageClear.html?carriageId=' + data.carriageId],
                 area: ['85%', '85%'],
                 shadeClose: true,
                 move: false,
@@ -129,7 +129,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
                     {title: 'ID', fixed: 'left', type: 'numbers', align: 'center'},
                     {field: 'carriageId', title: '运输合同编号', align: 'center'},
                     {field: 'state', title: '状态', align: "center"},
-                    {field: 'receivePhone', title: '收货联系人', align: 'center'},
+                    {field: 'reciverPhone', title: '收货联系人', align: 'center'},
                     {fixed: 'right', title: "操作", align: "center", toolbar: '#barDemo' + (id + 1), width: 200}
                 ]]
             });

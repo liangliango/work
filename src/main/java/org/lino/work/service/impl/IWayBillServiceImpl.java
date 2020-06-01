@@ -1,6 +1,11 @@
 package org.lino.work.service.impl;
 
+import org.lino.work.base.bean.CustomerClear;
+import org.lino.work.base.bean.Income;
 import org.lino.work.base.bean.WayBill;
+import org.lino.work.iobus.dao.ICustomerClearDao;
+import org.lino.work.iobus.dao.ICustomerDao;
+import org.lino.work.iobus.dao.IIncomeDao;
 import org.lino.work.iobus.dao.IWayBillDao;
 import org.lino.work.service.IWayBillService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service(value = "IwayBillService")
@@ -18,6 +25,13 @@ public class IWayBillServiceImpl implements IWayBillService {
 
     @Autowired
     private IWayBillDao wayBillDao;
+
+    @Autowired
+
+    private IIncomeDao incomeDao;
+
+    @Autowired
+    private ICustomerClearDao customerClearDao;
 
     @Override
     public WayBill findWayBillByBillId(String billId) {
@@ -82,6 +96,45 @@ public class IWayBillServiceImpl implements IWayBillService {
     public List<WayBill> findWayBillByState1() {
 
         return wayBillDao.findWayBillByState("未到");
+    }
+
+    @Transactional
+    @Override
+    public boolean updateWayBillByBillId1(String billId) {
+
+        try {
+            LocalDate localDate = LocalDate.now();
+            String month = localDate.getYear()+"-"+localDate.getMonth().getValue();
+            WayBill wayBill = wayBillDao.findByBillId(billId);
+            wayBill.setState("已结算");
+            Income income = new Income();
+            CustomerClear customerClear = new CustomerClear();
+            customerClear.setWayBillId(wayBill.getBillId());
+            customerClear.setIsClear(true);
+            customerClear.setInsurance(wayBill.getInsurance());
+            customerClear.setFreight(wayBill.getFreight());
+            customerClear.setId("KH"+System.currentTimeMillis());
+            customerClear.setClearDate(new Date(System.currentTimeMillis()));
+            customerClear.setCustomerId(wayBill.getPayCustomer());
+            customerClear.setMoney(wayBill.getFreight()+wayBill.getInsurance());
+
+            income.setProfit(wayBill.getFreight()+wayBill.getInsurance());
+            income.setPayout(0);
+            income.setOther(0);
+            income.setInsuranceFee(wayBill.getInsurance());
+            income.setIncome(wayBill.getFreight()+wayBill.getInsurance());
+            income.setCarriageFee(wayBill.getFreight());
+            income.setWage(0);
+            income.setMonth(month);
+
+            wayBillDao.save(wayBill);
+            incomeDao.save(income);
+            customerClearDao.save(customerClear);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

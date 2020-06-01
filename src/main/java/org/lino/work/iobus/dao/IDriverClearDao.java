@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface IDriverClearDao extends JpaRepository<DriverClear, Long> {
+public interface IDriverClearDao extends JpaRepository<DriverClear, String> {
 
     public Page<DriverClear> findAllByDriverId(String driverId, Pageable pageable);
 
@@ -19,6 +19,10 @@ public interface IDriverClearDao extends JpaRepository<DriverClear, Long> {
 
     public Page<DriverClear> findAllByDriverIdAndIsClear(String driverId, Boolean isClear, Pageable pageable);
 
+
     public DriverClear findByCarriageId(String billId);
+
+
+
 
 }

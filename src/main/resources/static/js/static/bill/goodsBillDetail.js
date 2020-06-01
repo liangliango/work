@@ -59,7 +59,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
             layer.open({
                 type: 2,
                 title: '货运单结算',
-                content: ['billModifyDetail.html?billId=' + data.billId],
+                content: ['billClear.html?billId=' + data.billId],
                 area: ['85%', '85%'],
                 shadeClose: true,
                 move: false,
@@ -139,8 +139,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
                     {title: 'ID', fixed: 'left', type: 'numbers', align: 'center'},
                     {field: 'billId', title: '货运单编号', align: 'center'},
                     {field: 'state', title: '状态', align: "center"},
-                    {field: 'desc', title: '备注', align: 'center'},
-                    // {field: 'occurTime', title: '发生时间', align: "center", templet: '#createTime', sort: true},
+                    {field: 'desc1', title: '备注', align: 'center'},
                     {fixed: 'right', title: "操作", align: "center", toolbar: '#barDemo' + (id + 1), width: 200}
                 ]]
             });

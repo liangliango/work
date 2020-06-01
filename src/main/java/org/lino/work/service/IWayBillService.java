@@ -22,4 +22,5 @@ public interface IWayBillService {
 
     List<WayBill> findWayBillByState1();
 
+    boolean updateWayBillByBillId1(String billId);
 }

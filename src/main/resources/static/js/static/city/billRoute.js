@@ -44,20 +44,6 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'],function ()
         }
     });
 
-    // form.render('select');
-    // form.on('select(changeSend3)', function (data) {
-    //     alert("kkkkk");
-    //     console.log(data);
-    //     // ajax
-    //     // $.ajax({
-    //     //     type: 'get',
-    //     //     url: nginx_url + '/bill/findCustomerByCustomerId/' + data.value,
-    //     //     success: function (result) {
-    //     //         $("#reciver").val(result.customerName);
-    //     //         $("#reciverPhone").val(result.linkmanMobile);
-    //     //     }
-    //     // });
-    // });
     form.on('select(changeSend3)', function (data) {
         // ajax
         $.ajax({
@@ -83,10 +69,13 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'],function ()
     });
 
     form.on('select(changeSend)',function (data) {
+        console.log(data);
+        $("#routeInfo").empty();
         $.ajax({
             type:'get',
-            url:nginx_url+'/city/findRouteByRouteId'+data.val(),
+            url:nginx_url+'/city/findRouteByRouteId/'+data.value,
             success:function (result) {
+                let rand = 0;
                 let content = '<div class="layui-row layui-col-space15">' +
                     '<div class="layui-col-md12">' +
                     '<div class="layui-card">' +
@@ -99,8 +88,9 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'],function ()
                 content += '耗时：' + result.fetchTime + '天';
                 content += '</div></div>' +
                     '<div class="layui-card-body layui-col-space10">';
-                if (item.passStation !== '') {
+                if (result.passStation !== '') {
                     let passStation = result.passStation.split(',');
+                    console.log(passStation);
                     $.each(passStation, function (j, temp) {
                         content += j === 0 ? '' : ' - ';
                         content += '<span class="layui-badge-dot ' + range_dot[(rand++ % 7)] + '"></span> ';
@@ -117,13 +107,17 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'],function ()
     });
 
     form.on('submit(addBillRoute)',function () {
+        $("#billRouteForm :input").each(function () {
+            $(this).removeAttr("disabled");
+        });
         $.ajax({
             type:"post",
             url:nginx_url+'/city/addBillRoute',
             data: $("#billRouteForm").serialize(),
             dataType:"json",
             success: function (result) {
-                if (result.status === "SUCCESS") {
+                console.log(result);
+                if (result=== "SUCCESS") {
                     layer.msg('货物路线信息添加成功', {
                         time: 800,
                         icon: 1

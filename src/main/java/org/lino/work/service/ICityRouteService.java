@@ -8,7 +8,7 @@ import java.util.List;
 public interface ICityRouteService {
     List<CityRoute> findRouteByStartAndEnd(String start, String end);
 
-    CityRoute findRouteByRouteId(String routeID);
+    CityRoute findRouteByRouteId(int routeID);
 
     boolean addCityRoute(CityRoute cityRoute);
 

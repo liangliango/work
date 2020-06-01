@@ -33,4 +33,12 @@ public interface ICarriageService {
     String updateCarriage(Carriage carriage);
 
     List<Carriage> findAllCarriageByState(String state);
+
+    Page<Carriage> findCarriageByDriverId(String driverId, Pageable pageable);
+
+    List<Carriage> findAllCarriage2();
+
+    String arrive(String carriageId);
+
+    String updateWayBillByBillId1(String billId);
 }

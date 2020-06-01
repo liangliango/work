@@ -1,9 +1,6 @@
 let cityArray = [];
 let pass_station = [];
-let cityId;
 let number1 = 0;
-let range_dot = ['', 'layui-bg-orange', 'layui-bg-green', 'layui-bg-cyan', 'layui-bg-blue', 'layui-bg-black', 'layui-bg-gray'];
-//获取所有城市信息（id + cityName）
 
 layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function () {
     let element = layui.element,
@@ -138,8 +135,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function (
         console.log(data);
         console.log(data.value);
         addPass(data.value);
-        // number1=number1+1;
-        let content = "<button type='button' class='layui-btn layui-btn-sm' id='city-" +  + "' onclick='removeSpan(" + number1 + ")'>";
+        let content = "<button type='button' class='layui-btn layui-btn-sm' id='city-" + data.value + "' onclick='removeSpan($(this))'>";
         content += data.value;
         content += "<span class='layui-badge layui-bg-gray' style='font-size: 4px; line-height: 16px; height: 16px'>X</span></button>";
 
@@ -160,11 +156,10 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'], function (
     }
 
     function removeSpan(id) {
-        let buttonId = '#city-' + id;
-        pass_station.splice($.inArray(id, pass_station), 1);
+        console.log(id);
+        pass_station.splice($.inArray(id.val(), pass_station), 1);
         console.log(pass_station);
-        number1--;
-        $(buttonId).remove();
+        $(id).remove();
     }
 
     function addPass(passStation1) {

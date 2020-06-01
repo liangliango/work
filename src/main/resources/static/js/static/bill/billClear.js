@@ -7,6 +7,7 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
         $ = layui.jquery;
 
     let billId = window.location.href.split("=")[1];
+    console.log(billId);
     $.ajax({
         type: "get",
         url: nginx_url + "/bill/findWayBillByBillId/" + billId,
@@ -54,7 +55,7 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
 
         $.ajax({
             type: 'put',
-            url: nginx_url + '/bill/updateWayBillByBillId/' + billId,
+            url: nginx_url + '/bill/updateWayBillByBillId1/' + billId,
             data: $("#goodsBillForm").serialize(),
             dataType: "json",
             success: function (result) {

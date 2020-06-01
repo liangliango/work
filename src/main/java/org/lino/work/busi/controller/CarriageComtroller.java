@@ -87,6 +87,10 @@ public class CarriageComtroller {
         return carriageService.updateWayBillByBillId(billId,wayBill);
     }
 
+    @RequestMapping(value = "/updateWayBillByBillId1/{billId}",method = RequestMethod.PUT)
+    public String updateWayBillByBillId1(@PathVariable("billId")String billId){
+        return carriageService.updateWayBillByBillId1(billId);
+    }
     @RequestMapping(value = "/deleteCarriageByCarriageId/{carriageId}",method = RequestMethod.DELETE)
     public String deleteCarriageByCarriageId(@PathVariable("carriageId")String carriageId){
         return carriageService.deleteCarriageByCarriageId(carriageId);

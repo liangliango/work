@@ -13,7 +13,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.List;
 
-@Service("IDriverService")
+@Service()
 public class DriverServiceImpl implements IDriverService {
 
     private static final String sj="SJ";

@@ -45,4 +45,5 @@ public class CustomerClear {
     private Boolean isClear;
 
     private Date clearDate;
+
 }

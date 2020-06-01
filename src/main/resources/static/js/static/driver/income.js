@@ -1,15 +1,16 @@
+let driverId = $.cookie("loginId");
 layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
     let element = layui.element,
         form = layui.form,
         laydate = layui.laydate,
         layer = layui.layer,
         table = layui.table;
-    let array = [0, 1];
+    let array = ['未结算', '已结算'];
 
     refresh(0);
 
-    let driverId = $.cookie("loginId");
 
+    console.log(driverId);
     // 监听工具条
     table.on('tool(cargoReceiptTool)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
         let data = obj.data; //获得当前行数据
@@ -41,7 +42,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
             elem: '#cargoReceiptTable' + (id + 1),
             height: 'full-170',
             url: nginx_url + '/driver/findDriverClearByDriverIdAndState',
-            data:{"driverId":driverId,"isClear":array[id]},
+            data:{"driverId":driverId,"state":array[id]},
             datatype:"json",
             limit: 10,
             limits: [10],

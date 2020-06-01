@@ -35,12 +35,16 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <div class="layui-inline">
+            <label class="layui-form-label">路线编号</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" id="routeId" name="routeId" disabled autocomplete="off" >
+            </div>
+        </div>
+        <div class="layui-form-item">
                 <label class="layui-form-label">途径站点</label>
                 <div style="padding: 20px; background-color: #F2F2F2;" id="routeInfo">
 
                 </div>
-            </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-inline">
@@ -60,9 +64,9 @@
             <div class="layui-inline">
                 <label class="layui-form-label">货物状态</label>
                 <div class="layui-input-inline">
-                    <select id="billstate">
+                    <select id="state">
                         <option value="">请选择货物情况</option>
-                        <option value="未到">未到</option>
+                        <option value="未到" selected>未到</option>
                         <option value="已到">已到</option>
                     </select>
                 </div>
@@ -80,9 +84,9 @@
 </div>
 <script src="../../../layui/layui.js"></script>
 <script src="../../../js/jquery/jquery-3.3.1.js"></script>
-
+<script src="../../../js/jquery/jquery.cookie.js"></script>
 <script src="../../../js/nginx.js"></script>
-<script src="../../../js/static/driver/route.js"></script>
+<script src="../../../js/static/driver/report.js"></script>
 
 </body>
 </html>

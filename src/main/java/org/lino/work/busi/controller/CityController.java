@@ -47,7 +47,8 @@ public class CityController {
 
     @RequestMapping(value = "/findRouteByRouteId/{routeId}",method = RequestMethod.GET)
     public CityRoute findRouteByRouteId(@PathVariable("routeId") String routeId){
-        return cityRouteService.findRouteByRouteId(routeId);
+        System.out.println(routeId);
+        return cityRouteService.findRouteByRouteId(Integer.parseInt(routeId));
     }
 
 

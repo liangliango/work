@@ -9,8 +9,7 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
     let carriageId = window.location.href.split("=")[1];
     $.ajax({
         type: "get",
-        url: nginx_url + "/driver/findDriverClearByCarriageId/",
-        data:{"carriageId":carriageId},
+        url: nginx_url + "/driver/findDriverClearByCarriageId/"+carriageId,
         datatype:"json",
         async: false,
         success: function (result) {
