@@ -3,10 +3,12 @@ package org.lino.work.busi.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.lino.work.base.bean.PageWithGroup;
 import org.lino.work.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @CrossOrigin
@@ -37,6 +39,15 @@ public class UserController extends ReturnType {
             return ERROR;
         }
         return SUCCESS;
+    }
+
+    @ApiOperation(value = "查询权限")
+    @RequestMapping(value = "/selectPage/{loginId}", method = RequestMethod.GET)
+    public List<PageWithGroup> selectPage(@PathVariable("loginId") String loginId) {
+
+        List<PageWithGroup> functions = userService.findPageByLoginId(loginId);
+
+        return functions;
     }
 
 }

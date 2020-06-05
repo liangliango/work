@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>结算详情</title>
+    <link rel="stylesheet" href="../../../layui/css/layui.css">
+    <link rel="stylesheet" href="../../../css/admin.css">
+    <style>
+        .wd-100 {
+            width: 140px;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-form-item" style="margin-top: 20px">
+    <form class="layui-form" action="" id="cargoReceiptForm">
+        <div class="layui-form-item">
+            <label class="layui-form-label wd-100">运输合同编号</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" disabled id="carriageId" name="carriageId">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">搬运费</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" disabled id="truckFee" name="truckFee">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">运费</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" disabled id="frieght" name="frieght">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">保险费</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" disabled id="insurance" name="insurance">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">押金</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" disabled id="cashPledge" name="cashPledge">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">车辆使用费</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" disabled id="carFee" name="carFee">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">扣款</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" disabled id="err" name="err">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">收入</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="money" id="money" disabled
+                           class="layui-input"/>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">登记日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="writeDate" id="writeDate" disabled
+                           class="layui-input test-item"/>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">结算日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="clearDate" id="clearDate" disabled
+                           class="layui-input test-item"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="../../../layui/layui.js"></script>
+<script src="../../../js/jquery/jquery-3.3.1.js"></script>
+<script src="../../../js/jquery/jquery.cookie.js"></script>
+<script src="../../../js/nginx.js"></script>
+<script src="../../../js/static/driver/dclearDetail.js"></script>
+
+</body>
+</html>

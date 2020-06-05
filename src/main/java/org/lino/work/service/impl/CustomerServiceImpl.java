@@ -1,18 +1,21 @@
 package org.lino.work.service.impl;
 
+import cn.hutool.crypto.SecureUtil;
 import org.lino.work.base.bean.*;
-import org.lino.work.iobus.dao.ICustomerClearDao;
-import org.lino.work.iobus.dao.ICustomerDao;
-import org.lino.work.iobus.dao.IUserDao;
-import org.lino.work.iobus.dao.IWayBillDao;
+import org.lino.work.iobus.dao.*;
 import org.lino.work.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.List;
 
+@Service("ICustomerService")
+@Transactional(propagation = Propagation.REQUIRED)
 public class CustomerServiceImpl implements ICustomerService {
 
     private static final String kh = "KH";
@@ -29,22 +32,26 @@ public class CustomerServiceImpl implements ICustomerService {
     @Autowired
     private ICustomerClearDao customerClearDao;
 
+    @Autowired
+    IUserWithGroupDao userWithGroupDao;
+
+    @Transactional
     @Override
     public boolean save(Customer customer) {
 
-        String id = kh+(int)Math.random()*100000;
-        Customer customer1 = customerDao.findByCustomerId(id);
-        while(customer1 != null){
-            id = kh+(int)Math.random()*100000;
-            customer1 = customerDao.findByCustomerId(id);
-        }
+        String id = kh+System.currentTimeMillis();
         customer.setCustomerId(id);
         try {
             customerDao.save(customer);
             User user = new User();
-            user.setPassword("123456");
+            String pwd = SecureUtil.md5("123456");
+            user.setPassword(pwd);
             user.setLoginId(customer.getCustomerId());
             userDao.save(user);
+            UserWithGroup userWithGroup = new UserWithGroup();
+            userWithGroup.setUserId(id);
+            userWithGroup.setGroupId(2);
+            userWithGroupDao.save(userWithGroup);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,9 +61,11 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
-    public boolean delete(String customerCode) {
+    public boolean delete(String customerId) {
         try {
-            customerDao.deleteByCustomerId(customerCode);
+            customerDao.deleteByCustomerId(customerId);
+            userWithGroupDao.deleteByUserId(customerId);
+            userDao.deleteByLoginId(customerId);
             return true;
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().isRollbackOnly();
@@ -103,11 +112,11 @@ public class CustomerServiceImpl implements ICustomerService {
 
         try {
             CustomerClear customerClear = new CustomerClear();
-            customerClear.setCustomerId(wayBill.getPayCusomer());
+            customerClear.setCustomerId(wayBill.getPayCustomer());
             customerClear.setFreight(wayBill.getFreight());
             customerClear.setInsurance(wayBill.getInsurance());
             customerClear.setIsClear(false);
-            customerClear.setWayBillId(wayBill.getId());
+            customerClear.setWayBillId(wayBill.getBillId());
             customerClear.setWriteDate(wayBill.getWriteDate());
             customerClearDao.save(customerClear);
             return wayBillDao.save(wayBill);
@@ -115,6 +124,40 @@ public class CustomerServiceImpl implements ICustomerService {
             TransactionAspectSupport.currentTransactionStatus().isRollbackOnly();
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public List<String> findAllCustomerId() {
+        return customerDao.findAllCustomerId();
+    }
+
+    @Override
+    public Customer findCustomerByCustomerId(String customerId) {
+        return customerDao.findByCustomerId(customerId);
+    }
+
+    @Override
+    public Page<Customer> findAllCusomer(Pageable pageable) {
+        return customerDao.findAll(pageable);
+    }
+
+    @Override
+    public boolean addCustomer(Customer customer) {
+        return this.save(customer);
+    }
+
+    @Override
+    public String updateCustomerByCustomerId(String customerId, Customer customer) {
+
+        try {
+            customer.setCustomerId(customerId);
+            customerDao.save(customer);
+
+            return "SUCCESS";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "ERROR";
         }
     }
 }

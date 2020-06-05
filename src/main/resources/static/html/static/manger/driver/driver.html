@@ -22,21 +22,21 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">司机姓名</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="driverName" required lay-verify="required"
+                                <input type="text" name="driverName" id="driverName" required lay-verify="required"
                                        placeholder="请输入司机姓名" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">身份证号</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="idCard" required lay-verify="required|identity"
+                                <input type="text" name="idCard" id="idCard" required lay-verify="required|identity"
                                        placeholder="请输入身份证号" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">电话</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="phone" required lay-verify="required|phone" placeholder="请输入电话"
+                                <input type="text" name="phone" id="phone" required lay-verify="required|phone" placeholder="请输入电话"
                                        autocomplete="off" class="layui-input">
                             </div>
                         </div>
@@ -47,8 +47,8 @@
                             <div class="layui-input-inline">
                                 <select name="gender" lay-verify="required">
                                     <option value=""></option>
-                                    <option value="0">男</option>
-                                    <option value="1">女</option>
+                                    <option value="男">男</option>
+                                    <option value="女">女</option>
                                 </select>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">住址</label>
                             <div class="layui-input-block" style="width: 514px">
-                                <input type="text" name="address" required lay-verify="required" placeholder="请输入司机住址"
+                                <input type="text" name="address" id="address" required lay-verify="required" placeholder="请输入司机住址"
                                        autocomplete="off" class="layui-input">
                             </div>
                         </div>
@@ -80,20 +80,20 @@
                         <div>
                             <label class="layui-form-label">驾驶证编号</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="driveLicence" autocomplete="off" placeholder="请输入驾驶证编号" class="layui-input">
+                                <input type="text" name="driveLicence" id="driveLicence" autocomplete="off" placeholder="请输入驾驶证编号" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">车辆类型</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="carType" required lay-verify="required" placeholder="请输入车型"
+                                <input type="text" name="carType" id="carType" required lay-verify="required" placeholder="请输入车型"
                                        autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">车牌号</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="carNo" required lay-verify="required" placeholder="请输入车牌号"
+                                <input type="text" name="carNo" id="carNo" required lay-verify="required" placeholder="请输入车牌号"
                                        autocomplete="off" class="layui-input">
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">准载体积</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="volume" required lay-verify="required|number"
+                                <input type="text" name="volume" id="volume" required lay-verify="required|number"
                                        placeholder="请输入准载体积" autocomplete="off" class="layui-input">
                             </div>
                             <div class="layui-form-mid layui-word-aux">（单位： 立方米）</div>
@@ -111,7 +111,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">准载重量</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="allowCarryWeight" required lay-verify="required|number"
+                                <input type="text" name="weight" id="weight" required lay-verify="required|number"
                                        placeholder="请输入准载重量" autocomplete="off" class="layui-input">
                             </div>
                             <div class="layui-form-mid layui-word-aux">（单位： 吨）</div>
@@ -122,7 +122,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">车厢长度</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="length" required lay-verify="required" placeholder="请输入车厢长度"
+                                <input type="text" name="length" id="length" required lay-verify="required" placeholder="请输入车厢长度"
                                        autocomplete="off" class="layui-input">
                             </div>
                             <div class="layui-form-mid layui-word-aux">（单位： 毫米）</div>
@@ -130,7 +130,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">车厢宽度</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="width" required lay-verify="required" placeholder="请输入车厢宽度"
+                                <input type="text" name="width" id="width" required lay-verify="required" placeholder="请输入车厢宽度"
                                        autocomplete="off" class="layui-input">
                             </div>
                             <div class="layui-form-mid layui-word-aux">（单位： 毫米）</div>
@@ -138,7 +138,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">载物高度</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="height" required lay-verify="required"
+                                <input type="text" name="height" id="height" required lay-verify="required"
                                        placeholder="请输入载物高度" autocomplete="off" class="layui-input">
                             </div>
                             <div class="layui-form-mid layui-word-aux">（单位： 毫米）</div>
@@ -155,11 +155,15 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">公司车</label>
                             <div class="layui-input-inline">
-                                <input type="checkbox" lay-skin="switch" id="switchValue" lay-filter="checkCondition"
-                                       lay-text="是|否">
+<!--                                <input type="checkbox" lay-skin="switch" id="switchValue" lay-filter="checkCondition"-->
+<!--                                       lay-text="是|否">-->
+                                <select id="isCompany" lay-fither="companyCar">
+                                    <option value="0">否</option>
+                                    <option value="1">是</option>
+                                </select>
                             </div>
                         </div>
-                        <input type="hidden" id="companyCar" name="companyCar" value="false">
+<!--                        <input type="hidden" id="companyCar" name="companyCar" >-->
                     </div>
 
                     <div class="layui-form-item">
@@ -172,7 +176,7 @@
             </div>
         </div>
         <div class="layui-tab-item">
-            <table id="driverTable" lay-filter="driverTool" lay-data="{id: 'driverTable'}"></table>
+            <table id="driverTable" lay-filter="driverTool"></table>
             <script type="text/html" id="barDemo">
                 <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="detail">查看详情</a>
                 <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>

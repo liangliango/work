@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * 货运单表
@@ -49,7 +49,7 @@ public class WayBill {
     private String reciverPhone;
 
     @Column(length = 50)
-    private String payCusomer;
+    private String payCustomer;
 
     @Column(length = 50)
     private String payType;
@@ -84,7 +84,7 @@ public class WayBill {
     private Date arriveDate;
 
     @Column(length = 200)
-    private String desc;
+    private String desc1;
 
     @Column(length = 50)
     private String err;

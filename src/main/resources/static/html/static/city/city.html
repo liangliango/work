@@ -12,7 +12,7 @@
     </style>
 </head>
 <body>
-<div class="layui-tab">
+<div class="layui-tab layui-tab-brief" lay-filter="demo">
 <ul class="layui-tab-title">
     <li>增加城市信息</li>
     <li>增加城市路由</li>
@@ -42,7 +42,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">主要城市：</label>
                     <div class="layui-input-inline">
-                        <select name="cityId" id="cityId" lay-verify="required" lay-search lay-filter="changeCity">
+                        <select name="cityId" id="cityId" lay-verify="required" >
                             <option value="">请选择城市</option>
                         </select>
                     </div>
@@ -50,7 +50,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">范围城市：</label>
                     <div class="layui-input-inline">
-                        <select name="linkCity" disabled id="linkCity" lay-filter="changeRange">
+                        <select name="linkCity"  id="linkCity" >
                             <option value="">请选择范围城市</option>
                         </select>
                     </div>
@@ -105,7 +105,7 @@
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">已选范围：</label>
-                <div class="layui-btn-container" id="selectedCity2"></div>
+                <div class="layui-btn-container" id="selectedCity2" ></div>
             </div>
 
             <div class="layui-form-item">
@@ -124,7 +124,7 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit lay-filter="addRoute" id="addRoute">立即提交</button>
+                    <button class="layui-btn" lay-submit  lay-filter="addRoute" id="addRoute">立即提交</button>
                     <button type="reset" id="resetForm3" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>

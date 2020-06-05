@@ -18,10 +18,10 @@ public interface ICustomerService {
 
     /**
      * 删除一个客户
-     * @param customerCode
+     * @param customerId
      * @return
      */
-    public boolean delete(String customerCode);
+    public boolean delete(String customerId);
 
     /**
      * 通过客户id删除客户
@@ -58,4 +58,13 @@ public interface ICustomerService {
      */
     public WayBill add(WayBill wayBill);
 
+    List<String> findAllCustomerId();
+
+    Customer findCustomerByCustomerId(String customerId);
+
+    Page<Customer> findAllCusomer(Pageable pageable);
+
+    boolean addCustomer(Customer customer);
+
+    String updateCustomerByCustomerId(String customerId, Customer customer);
 }

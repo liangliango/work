@@ -19,16 +19,16 @@ public class CityRoute {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int routeId;
 
     @Column
-    private int startStation;
+    private String startStation;
 
     @Column(length = 100)
     private String passStation;
 
     @Column
-    private int endStation;
+    private String endStation;
 
     private double distance;
 

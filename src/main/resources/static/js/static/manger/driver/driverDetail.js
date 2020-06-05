@@ -12,7 +12,7 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
 
     $.ajax({
         type: 'get',
-        url: nginx_url + '/driver/selectById/' + driverId,
+        url: nginx_url + '/manger/findDriverByDriverId/' + driverId,
         dataType: 'json',
         success: function (result) {
             $.each(result, function (i, item) {
@@ -25,9 +25,11 @@ layui.use(['layer', 'form', 'element', 'laydate', 'jquery', 'table'], function (
                 value: new Date(result.birthday)
             });
             if (result.isCompany === true) {
-                $("#switchValue").attr("checked", "checked");
+                $("#isCompany").val("是");
+            }else{
+                $("#isCompany").val("否");
             }
-            form.render('checkbox');
+            form.render();
         }
     })
 });

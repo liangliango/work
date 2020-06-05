@@ -2,18 +2,18 @@ let login = $.cookie("loginId");
 let funArray = [];
 $.ajax({
     type: 'get',
-    url: nginx_url + '/selectFunc/' + login,
+    url: nginx_url + '/selectPage/' + login,
     async: false,
     dataType: 'json',
     success: function (result) {
         funArray = [];
         $.each(result, function (i, item) {
-            funArray.push(item.functionId);
+            funArray.push(item.pageId);
         })
     }
 });
 
-for (let i = 1; i <= 11; i++) {
+for (let i = 1; i <= 8; i++) {
     if ($.inArray(i, funArray) == -1) {
         $("#function_" + i).remove();
     }
@@ -32,16 +32,6 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
         let id = nav_a.attr('data-id');
         let url = nav_a.attr('data-url');
         let text = nav_a.attr('data-text');
-
-        if (id === '7') {
-            let loginId = $.cookie('loginId');
-            let type = loginId.slice(0, 2);
-            if (type === 'KH') {
-                url = 'html/getGoodsControl/callback/customerCallback.html';
-            } else if (type === 'SJ') {
-                url = 'html/getGoodsControl/callback/driverCallback.html';
-            }
-        }
 
         if (!url) {
             return;
@@ -75,5 +65,5 @@ function logout() {
 }
 
 function update() {
-    $("a[data-id='33']").click();
+    $("a[data-id='17']").click();
 }

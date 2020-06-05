@@ -42,14 +42,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label wd-100">发货地址</label>
             <div class="layui-input-inline" style="width: 534px">
-                <input type="text" id="sendAdress" name="sendAdress"  autocomplete="off"
+                <input type="text" id="sendAdreass" name="sendAdreass"  autocomplete="off"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label wd-100">收货客户编号</label>
             <div class="layui-input-inline">
-                <select name="receiveId" lay-verify="required" lay-filter="changeSend2"
+                <select name="reciverId" lay-verify="required" lay-filter="changeSend2"
                         id="receiveId" lay-search>
                     <option value="">请选择收货客户编号</option>
                 </select>
@@ -59,14 +59,14 @@
             <div class="layui-inline">
                 <label class="layui-form-label wd-100">收货客户</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="receive" name="receive" disabled autocomplete="off"
+                    <input type="text" id="reciver" name="reciver" disabled autocomplete="off"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label wd-100">收货客户电话</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="receivePhone" name="receivePhone"
+                    <input type="text" id="reciverPhone" name="reciverPhone"
                            disabled autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -74,7 +74,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label wd-100">收货地址</label>
             <div class="layui-input-inline" style="width: 534px">
-                <input type="text" id="receiveAdress" name="receiveAdress"
+                <input type="text" id="reciverAdreass" name="reciverAdreass"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -82,7 +82,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">支付人</label>
                 <div class="layui-input-inline">
-                    <select name="receiveId" lay-verify="required" lay-filter="changeSend3"
+                    <select name="payCustomer" lay-verify="required" lay-filter="changeSend3"
                             id="payCustomer" lay-search>
                         <option value="">请选择收货客户编号</option>
                     </select>
@@ -96,9 +96,9 @@
                 <div class="layui-input-inline">
                     <select name="payType" id="payType" lay-verify="required">
                         <option value=""></option>
-                        <option value="0">现金支付</option>
-                        <option value="1">微信支付</option>
-                        <option value="2">支付宝支付</option>
+                        <option value="现金支付">现金支付</option>
+                        <option value="微信支付">微信支付</option>
+                        <option value="支付宝支付">支付宝支付</option>
                     </select>
                 </div>
             </div>
@@ -161,13 +161,13 @@
             <div class="layui-inline">
                 <label class="layui-form-label wd-100">运费</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="freight" id="freight" class="layui-input test-item"/>
+                    <input type="text" name="freight" id="freight" class="layui-input "/>
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label wd-100">保险费</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="insurance" id="insurance"  class="layui-input test-item"/>
+                    <input type="text" name="insurance" id="insurance"  class="layui-input"/>
                 </div>
             </div>
         </div>
@@ -176,14 +176,14 @@
                 <label class="layui-form-label wd-100">状态</label>
                 <div class="layui-input-inline">
                     <select name="state" id="state" required disabled>
-                        <option value="0">未分发</option>
+                        <option value="待发">待发</option>
                     </select>
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label wd-100">描述</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="desc" id="desc"  class="layui-input test-item"/>
+                    <input type="text" name="desc1" id="desc1"  class="layui-input "/>
                 </div>
             </div>
         </div>

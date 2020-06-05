@@ -7,4 +7,5 @@ public interface IUserWithGroupDao extends JpaRepository<UserWithGroup, Long> {
 
     public UserWithGroup findByUserId(String userId);
 
+    void deleteByUserId(String userId);
 }

@@ -9,7 +9,8 @@
 <body>
 <div class="layui-tab layui-tab-brief" lay-filter="demo">
     <ul class="layui-tab-title">
-        <li class="layui-this">未到合同</li>
+        <li class="layui-this">未出合同</li>
+        <li>未到合同</li>
         <li>已到合同</li>
         <li>已结算合同</li>
         <li>所有合同</li>
@@ -33,11 +34,18 @@
             <table id="cargoReceiptTable3" lay-filter="cargoReceiptTool"></table>
             <script type="text/html" id="barDemo3">
                 <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="detail">查看详情</a>
+                <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="clear">结算</a>
             </script>
         </div>
         <div class="layui-tab-item">
             <table id="cargoReceiptTable4" lay-filter="cargoReceiptTool"></table>
             <script type="text/html" id="barDemo4">
+                <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="detail">查看详情</a>
+            </script>
+        </div>
+        <div class="layui-tab-item">
+            <table id="cargoReceiptTable5" lay-filter="cargoReceiptTool"></table>
+            <script type="text/html" id="barDemo5">
                 <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="detail">查看详情</a>
             </script>
         </div>

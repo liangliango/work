@@ -40,7 +40,6 @@ public class Employee {
     @Column(length = 50)
     private String gender;
 
-    @Column(length = 50)
     private Date birthday;
 
     @Column(length = 50)

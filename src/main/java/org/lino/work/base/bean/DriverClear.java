@@ -9,7 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * 司机结算主表
@@ -32,7 +32,7 @@ public class DriverClear {
     private String driverId;
 
     @Column(length = 50)
-    private String CarriageId;
+    private String carriageId;
 
     private Double truckFee;
 

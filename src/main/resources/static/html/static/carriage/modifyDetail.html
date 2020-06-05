@@ -17,10 +17,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label wd-100">货运单编号</label>
             <div class="layui-input-inline">
-                <select name="billId" lay-verify="required" lay-filter="changeSend"
-                        id="billId" lay-search>
-                    <option value="">请选择货运单编号</option>
-                </select>
+                <input class="layui-input" disabled id="billId" name="billId">
             </div>
         </div>
         <div class="layui-form-item">
@@ -69,7 +66,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label wd-100">起运时间</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="startDate" id="startDate" disabled
+                    <input type="text" name="startDate" id="startDate"
                            class="layui-input test-item"/>
                 </div>
             </div>
@@ -86,7 +83,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label wd-100">期望到达时间</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="exceptDate" id="exceptDate" disabled class="layui-input test-item"/>
+                    <input type="text" name="exceptDate" id="exceptDate"  class="layui-input test-item"/>
                 </div>
             </div>
         </div>
@@ -114,11 +111,11 @@
             <div class="layui-inline">
                 <label class="layui-form-label wd-100">司机编号</label>
                 <div class="layui-input-inline">
-                    <!--                    <input type="text" id="driverId" name="driverId" disabled placeholder="请输入司机编号"-->
-                    <!--                           autocomplete="off" class="layui-input">-->
-                    <select id="driverId" name="driverId" lay-verify="required" lay-search>
-                        <option value="">请选择司机编号</option>
-                    </select>
+                    <input type="text" id="driverId" name="driverId" disabled placeholder="请输入司机编号"
+                           autocomplete="off" class="layui-input">
+<!--                    <select id="driverId" name="driverId" lay-verify="required" lay-search>-->
+<!--                        <option value="">请选择司机编号</option>-->
+<!--                    </select>-->
                 </div>
             </div>
             <div class="layui-inline">
@@ -168,11 +165,9 @@
             <div class="layui-inline">
                 <label class="layui-form-label wd-100">状态</label>
                 <div class="layui-input-inline">
-                    <select name="state" id="state" lay-verify="required" disabled>
+                    <select name="state" id="state" lay-verify="required" >
                         <option value="未出合同">未出合同</option>
-                        <!--                        <option value="未出合同" selected>未出合同</option>-->
-                        <!--                        <option value="未到车辆">未到车辆</option>-->
-                        <!--                        <option value="未结合同">未结合同</option>-->
+                        <option value="未到">未到</option>
                     </select>
                 </div>
             </div>
@@ -196,7 +191,6 @@
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit lay-filter="update" id="update">立即提交</button>
-                <button class="layui-btn" lay-submit lay-filter="sendBill" id="sendBill">发货</button>
             </div>
         </div>
     </form>

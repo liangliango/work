@@ -13,8 +13,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "userwithgroup")
+@Entity(name = "userwithgroup")
 public class UserWithGroup {
 
     @Id

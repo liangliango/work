@@ -9,7 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * 客户运单结算表
@@ -28,10 +28,10 @@ public class CustomerClear {
     @Column(length = 50)
     private String id;
 
-    @Column
+    @Column(length = 50)
     private String customerId;
 
-    @Column
+    @Column(length = 50)
     private String wayBillId;
 
     private Double freight;
@@ -45,4 +45,5 @@ public class CustomerClear {
     private Boolean isClear;
 
     private Date clearDate;
+
 }

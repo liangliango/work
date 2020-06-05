@@ -7,7 +7,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
 
     $.ajax({
         type: "get",
-        url: nginx_url + "/selectAllEmpCode",
+        url: nginx_url + "/income/findAllEmployeeId",
         async: false,
         success: function (result) {
             $.each(result, function (i, item) {
@@ -32,7 +32,7 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
     form.on('submit(addEmployeeWage)', function (data) {
         $.ajax({
             type: "post",
-            url: nginx_url + "/Emp/addWage",
+            url: nginx_url + "/income/addEmpployeeWage",
             data: $("#employeeWageForm").serialize(),
             dataType: "json",
             success: function (result) {

@@ -11,11 +11,10 @@ import javax.persistence.*;
  *
  * @author lino
  */
-@Entity
+@Entity(name = "employeeuser")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "employeeuser")
 public class EmployeeUser {
 
     @Id

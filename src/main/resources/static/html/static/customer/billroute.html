@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>货物路线</title>
+    <link rel="stylesheet" href="../../../layui/css/layui.css">
+    <link rel="stylesheet" href="../../../css/admin.css">
+</head>
+<body>
+<div class="layui-form-item" style="margin-top: 20px">
+    <form class="layui-form" action="" id="billRouteForm">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">货物编号</label>
+                <div class="layui-input-inline">
+                    <select id="billId" lay-filter="changeSend">
+                        <option value="">请选择货运单编号</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">起点</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" id="start" name="start" disabled autocomplete="off" >
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">终点</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" id="end" name="end" disabled autocomplete="off" >
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">路线编号</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" id="routeId" name="routeId" disabled autocomplete="off" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">途径站点</label>
+            <div style="padding: 20px; background-color: #F2F2F2;" id="routeInfo">
+
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">当前位置</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" id="now" name="now"  autocomplete="off" >
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">登记时间</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" id="signDate" name="signDate" disabled autocomplete="off" >
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">货物状态</label>
+                <div class="layui-input-inline">
+                    <input class="layui-input" id="state" name="state" disabled autocomplete="off" >
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="../../../layui/layui.js"></script>
+<script src="../../../js/jquery/jquery-3.3.1.js"></script>
+<script src="../../../js/jquery/jquery.cookie.js"></script>
+<script src="../../../js/nginx.js"></script>
+<script src="../../../js/static/customer/billroute.js"></script>
+
+</body>
+</html>
