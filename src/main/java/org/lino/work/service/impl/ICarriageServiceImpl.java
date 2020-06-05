@@ -146,6 +146,7 @@ public class ICarriageServiceImpl implements ICarriageService {
             System.out.println(billId);
             Carriage c = carriageDao.findByCarriageId(billId);
             c.setState("已结算");
+            c.setClear(true);
             DriverClear driverClear = new DriverClear();
             driverClear.setClearDate(new Date(System.currentTimeMillis()));
             driverClear.setIsClear(true);

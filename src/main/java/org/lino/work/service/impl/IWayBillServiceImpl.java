@@ -107,6 +107,7 @@ public class IWayBillServiceImpl implements IWayBillService {
             String month = localDate.getYear()+"-"+localDate.getMonth().getValue();
             WayBill wayBill = wayBillDao.findByBillId(billId);
             wayBill.setState("已结算");
+            wayBill.setClear(true);
             Income income = new Income();
             CustomerClear customerClear = new CustomerClear();
             customerClear.setWayBillId(wayBill.getBillId());
@@ -134,6 +135,44 @@ public class IWayBillServiceImpl implements IWayBillService {
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    @Override
+    public Page<WayBill> findWayBillbyStateAndSendId(String state, String customerId, Pageable pageable) {
+
+        return wayBillDao.findAllByStateAndSendId(state,customerId,pageable);
+    }
+
+    @Override
+    public Page<WayBill> findAllWayBillBySendId(String sendId, Pageable pageable) {
+        return wayBillDao.findAllBySendId(sendId,pageable);
+    }
+
+    @Override
+    public Page<WayBill> findWayBillbyStateAndReciverId(String state, String reciverId, Pageable pageable) {
+        return wayBillDao.findByStateAndReciverId(state,reciverId,pageable);
+    }
+
+    @Override
+    public Page<WayBill> findAllWayBillByReciverId(String reciverId, Pageable pageable) {
+        return wayBillDao.findAllByReciverId(reciverId,pageable);
+    }
+
+    @Override
+    public List<WayBill> findAllCanClearByPayCustomer(String payCustomer) {
+        return wayBillDao.findByPayCustomerAndState(payCustomer,"已到");
+    }
+
+    @Transactional
+    @Override
+    public String wayBillClearByBillId(String billId) {
+        try {
+            this.updateWayBillByBillId1(billId);
+            return "SUCCESS";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "ERROR";
         }
     }
 

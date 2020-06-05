@@ -1,14 +1,13 @@
 let driverId = $.cookie("loginId");
+let array = ['未结算', '已结算'];
 layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
     let element = layui.element,
         form = layui.form,
         laydate = layui.laydate,
         layer = layui.layer,
         table = layui.table;
-    let array = ['未结算', '已结算'];
 
     refresh(0);
-
 
     console.log(driverId);
     // 监听工具条
@@ -38,11 +37,11 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table'], function () {
     });
 
     function refresh(id) {
+        console.log(driverId,array[id]);
         table.render({
             elem: '#cargoReceiptTable' + (id + 1),
             height: 'full-170',
-            url: nginx_url + '/driver/findDriverClearByDriverIdAndState',
-            data:{"driverId":driverId,"state":array[id]},
+            url: nginx_url + '/driver/findDriverClearByDriverIdAndState/'+driverId+'/'+array[id],
             datatype:"json",
             limit: 10,
             limits: [10],

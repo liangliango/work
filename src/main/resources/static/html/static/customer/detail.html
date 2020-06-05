@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>接货单修改页面</title>
+    <title>接货单详情</title>
     <link rel="stylesheet" href="../../../layui/css/layui.css">
     <link rel="stylesheet" href="../../../css/admin.css">
     <style>
@@ -17,10 +17,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label wd-100">发货客户编号</label>
             <div class="layui-input-inline">
-                <div class="layui-input-inline">
-                    <input type="text" id="sendId" name="sendId"
-                           disabled autocomplete="off" class="layui-input">
-                </div>
+                <input type="text" id="sendId" name="sendId"
+                       disabled autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -34,7 +32,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label wd-100">发货客户电话</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="sendPhone" name="sendPhone"  autocomplete="off"
+                    <input type="text" id="sendPhone" name="sendPhone" disabled autocomplete="off"
                            class="layui-input">
                 </div>
             </div>
@@ -49,10 +47,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label wd-100">收货客户编号</label>
             <div class="layui-input-inline">
-                <div class="layui-input-inline">
-                    <input type="text" id="reciverId" name="reciverId"
-                           disabled autocomplete="off" class="layui-input">
-                </div>
+                <input type="text" id="reciverId" name="reciverId" disabled autocomplete="off"
+                       class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -67,7 +63,7 @@
                 <label class="layui-form-label wd-100">收货客户电话</label>
                 <div class="layui-input-inline">
                     <input type="text" id="reciverPhone" name="reciverPhone"
-                            autocomplete="off" class="layui-input">
+                           disabled autocomplete="off" class="layui-input">
                 </div>
             </div>
         </div>
@@ -82,24 +78,26 @@
             <div class="layui-inline">
                 <label class="layui-form-label">支付人</label>
                 <div class="layui-input-inline">
-                    <select name="payCustomer" lay-verify="required"
-                            id="payCustomer" lay-search>
-                        <option value="">请选择支付客户编号</option>
-                    </select>
+                    <!--                    <select name="receiveId" lay-verify="required" lay-filter="changeSend3"-->
+                    <!--                            id="payCustomer" lay-search>-->
+                    <!--                        <option value="">请选择收货客户编号</option>-->
+                    <!--                    </select>-->
+                    <input id="payCustomer" disabled class="layui-input">
                 </div>
-<!--                <div class="layui-input-inline">-->
-<!--                    <input class="layui-input" id="payCustomer" name="payCustomer" autocomplete="off">-->
-<!--                </div>-->
+                <!--                <div class="layui-input-inline">-->
+                <!--                    <input class="layui-input" id="payCustomer" name="payCustomer" autocomplete="off">-->
+                <!--                </div>-->
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label">支付方式</label>
                 <div class="layui-input-inline">
-                    <select name="payType" id="payType" lay-verify="required">
-                        <option value=""></option>
-                        <option value="现金支付">现金支付</option>
-                        <option value="微信支付">微信支付</option>
-                        <option value="支付宝支付">支付宝支付</option>
-                    </select>
+                    <!--                    <select name="payType" id="payType" lay-verify="required">-->
+                    <!--                        <option value=""></option>-->
+                    <!--                        <option value="0">现金支付</option>-->
+                    <!--                        <option value="1">微信支付</option>-->
+                    <!--                        <option value="2">支付宝支付</option>-->
+                    <!--                    </select>-->
+                    <input name="payType" id="payType" disabled CLASS="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
@@ -147,13 +145,13 @@
             <div class="layui-inline">
                 <label class="layui-form-label wd-100">发货日期</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="startDate" id="startDate" class="layui-input "/>
+                    <input type="text" name="startDate" id="startDate" class="layui-input test-item"/>
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label wd-100">预期交货日期</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="exceptDate" id="exceptDate" class="layui-input "/>
+                    <input type="text" name="exceptDate" id="exceptDate" class="layui-input test-item"/>
                 </div>
             </div>
         </div>
@@ -161,13 +159,13 @@
             <div class="layui-inline">
                 <label class="layui-form-label wd-100">运费</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="freight" id="freight" class="layui-input "/>
+                    <input type="text" name="freight" id="freight" class="layui-input"/>
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label wd-100">保险费</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="insurance" id="insurance"  class="layui-input "/>
+                    <input type="text" name="insurance" id="insurance"  class="layui-input"/>
                 </div>
             </div>
         </div>
@@ -175,16 +173,16 @@
             <div class="layui-inline">
                 <label class="layui-form-label wd-100">状态</label>
                 <div class="layui-input-inline">
-                    <select name="state" id="state" required >
-                        <option value="待发" selected>待发</option>
-                        <option value="未到">未到</option>
-                    </select>
+                    <!--                    <select name="state" id="state" required >-->
+                    <!--&lt;!&ndash;                        <option value="0">未分发</option>&ndash;&gt;-->
+                    <!--                    </select >-->
+                    <input name="state" id="state" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label wd-100">描述</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="desc1" id="desc1"  class="layui-input "/>
+                    <input type="text" name="desc1" id="desc1"  class="layui-input"/>
                 </div>
             </div>
         </div>
@@ -192,24 +190,31 @@
             <div class="layui-inline">
                 <label class="layui-form-label wd-100">填写日期</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="writeDate" id="writeDate" class="layui-input" lay-fither="writeDate"/>
+                    <input type="text" name="writeDate" id="writeDate" disabled class="layui-input"/>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">到达日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="arriveDate" id="arriveDate" disabled class="layui-input"/>
                 </div>
             </div>
         </div>
         <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button class="layui-btn layui-btn-radius layui-btn-normal" lay-submit lay-filter="modifyGoodsBill"
-                        id="modifyGoodsBill">立即修改
-                </button>
+            <div class="layui-inline">
+                <label class="layui-form-label wd-100">结算日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="clearDate" id="clearDate" disabled class="layui-input"/>
+                </div>
             </div>
         </div>
     </form>
 </div>
 <script src="../../../layui/layui.js"></script>
 <script src="../../../js/jquery/jquery-3.3.1.js"></script>
-
+<script src="../../../js/jquery/jquery.cookie.js"></script>
 <script src="../../../js/nginx.js"></script>
-<script src="../../../js/static/bill/modifyDetail.js"></script>
+<script src="../../../js/static/customer/detail.js"></script>
 
 </body>
 </html>

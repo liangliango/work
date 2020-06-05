@@ -35,10 +35,10 @@ public class DriverController {
     IBillRouteService billRouteService;
 
 
-    @RequestMapping(value = "/findDriverClearByDriverIdAndState",method = RequestMethod.GET)
-    public Result findDriverClearByDriverIdAndState(String driverId,String state,@RequestParam("pageNum") int pageNum, @RequestParam("limit") int limit){
+    @RequestMapping(value = "/findDriverClearByDriverIdAndState/{driverId}/{state}",method = RequestMethod.GET)
+    public Result findDriverClearByDriverIdAndState(@PathVariable("driverId") String driverId,@PathVariable("state") String state,@RequestParam("pageNum") int pageNum, @RequestParam("limit") int limit){
 
-
+        System.out.println(driverId+"--------->"+state);
         Pageable pageable = PageRequest.of(pageNum - 1, limit);
         Page<DriverClear> page = driverClearService.findDriverClearByDriverIdAndState(driverId,state,pageable);
         Result result = new Result(200, "SUCCESS", (int) page.getTotalElements(), page.getContent());

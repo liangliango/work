@@ -21,10 +21,11 @@ public class IDriverClearServiceImpl implements IDriverClearService {
     @Override
     public Page<DriverClear> findDriverClearByDriverIdAndState(String driverId, String state, Pageable pageable) {
         boolean isClear;
-        if (state == "未结算"){
-            isClear = false;
-        }else {
+        if (state.equals("已结算")){
             isClear = true;
+            System.out.println(state);
+        }else {
+            isClear = false;
         }
 
         return driverClearDao.findAllByDriverIdAndIsClear(driverId,isClear,pageable);

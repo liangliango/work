@@ -178,9 +178,9 @@ public class MangerController {
     }
 
     @RequestMapping(value = "/changePwd",method = RequestMethod.PUT)
-    public String changePwd(String loginId,String password){
-
-        return userService.changePwd(loginId,password);
+    public String changePwd(String loginId1,String password){
+        System.out.println(loginId1+"----->"+password);
+        return userService.changePwd(loginId1,password);
 
     }
 

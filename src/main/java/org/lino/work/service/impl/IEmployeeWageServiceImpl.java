@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+
 @Service("IEmployeeWageService")
 public class IEmployeeWageServiceImpl implements IEmployeeWageService {
     @Autowired
@@ -30,8 +32,9 @@ public class IEmployeeWageServiceImpl implements IEmployeeWageService {
             income.setCarriageFee(0);
             income.setWage(wage1.getBasicWage()+wage1.getExtraWage()+wage1.getPerformanceWage());
             java.util.Date date = new java.util.Date();
-            String s = date.getYear()+date.getMonth()+"";
-            income.setMonth(s);
+            LocalDate localDate = LocalDate.now();
+            String month = localDate.getYear()+"-"+localDate.getMonth().getValue();
+            income.setMonth(month);
             incomeDao.save(income);
             return "SUCCESS";
         } catch (Exception e) {

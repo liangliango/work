@@ -1,5 +1,5 @@
 let range_dot = ['', 'layui-bg-orange', 'layui-bg-green', 'layui-bg-cyan', 'layui-bg-blue', 'layui-bg-black', 'layui-bg-gray'];
-
+let payCustomer = $.cookie("loginId");
 layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'],function () {
 
     let element = layui.element,
@@ -92,9 +92,6 @@ layui.use(['element', 'form', 'laydate', 'layer', 'table', 'jquery'],function ()
                         data: {"carriageId":$("#billId").val(),},
                         dataType:"json",
                         success:function (result) {
-                            if (result==='SUCCESS'){
-                                $('#resetForm').click();
-                            }
 
                         }
                     })

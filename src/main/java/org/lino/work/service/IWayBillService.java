@@ -23,4 +23,16 @@ public interface IWayBillService {
     List<WayBill> findWayBillByState1();
 
     boolean updateWayBillByBillId1(String billId);
+
+    Page<WayBill> findWayBillbyStateAndSendId(String state, String customerId, Pageable pageable);
+
+    Page<WayBill> findAllWayBillBySendId(String sendId, Pageable pageable);
+
+    Page<WayBill> findWayBillbyStateAndReciverId(String state, String reciverId, Pageable pageable);
+
+    Page<WayBill> findAllWayBillByReciverId(String reciverId, Pageable pageable);
+
+    List<WayBill> findAllCanClearByPayCustomer(String payCustomer);
+
+    String wayBillClearByBillId(String billId);
 }

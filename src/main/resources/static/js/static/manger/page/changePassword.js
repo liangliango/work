@@ -6,13 +6,14 @@ layui.use(['layer', 'form', 'element', 'jquery'], function () {
         form = layui.form;
 
     form.on('submit(change)', function () {
+        console.log($("#loginId1").val());
 
         $.ajax({
             type: 'put',
             url: nginx_url + '/manger/changePwd',
             async: false,
             data: {
-                'loginId':+ $("#loginId").val(),
+                'loginId1': $("#loginId1").val(),
                 'password': $("#newPassword").val()
             },
             dataType: 'json',

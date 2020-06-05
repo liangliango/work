@@ -1,5 +1,6 @@
 package org.lino.work.service.impl;
 
+import cn.hutool.Hutool;
 import cn.hutool.crypto.SecureUtil;
 import org.lino.work.base.bean.PageWithGroup;
 import org.lino.work.base.bean.User;
@@ -89,7 +90,7 @@ public class UserServiceImpl implements IUserService {
 
         try {
             User user = userDao.findByLoginId(loginId);
-            user.setPassword(password);
+            user.setPassword(SecureUtil.md5(password));
             userDao.save(user);
             return "SUCCESS";
         } catch (Exception e) {

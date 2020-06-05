@@ -85,14 +85,15 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
         type: "get",
         url: nginx_url + "/bill/findAllCustomerId",
         success: function (result) {
+            console.log(result);
             $.each(result, function (i, item) {
                 let option = "<option value='" + item + "'>";
                 option += item;
                 option += "</option>";
                 $("#sendId").append(option);
                 $("#receiveId").append(option);
-                $("#payCusomer").append(option);
-                form.render();
+                $("#payCustomer").append(option);
+                form.render('select');
             });
         }
 

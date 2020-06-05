@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+
 @Transactional
 @Service
 public class IUpdServiceImpl implements IUpdService {
@@ -38,9 +40,9 @@ public class IUpdServiceImpl implements IUpdService {
             income.setInsuranceFee(0);
             income.setCarriageFee(0);
             income.setWage(0);
-            java.util.Date date = new java.util.Date();
-            String s = date.getYear()+date.getMonth()+"";
-            income.setMonth(s);
+            LocalDate localDate = LocalDate.now();
+            String month = localDate.getYear()+"-"+localDate.getMonth().getValue();
+            income.setMonth(month);
             income.setProfit(income.getIncome()-income.getPayout());
             incomeDao.save(income);
             return "SUCCESS";

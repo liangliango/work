@@ -22,4 +22,14 @@ public interface IWayBillDao extends JpaRepository<WayBill, String> {
 
     @Query("select w from waybill w where w.state = :state")
     List<WayBill> findWayBillByState(String state);
+
+    Page<WayBill> findAllByStateAndSendId(String state, String sendId, Pageable pageable);
+
+    Page<WayBill> findAllBySendId(String sendId, Pageable pageable);
+
+    Page<WayBill> findByStateAndReciverId(String state, String reciverId, Pageable pageable);
+
+    Page<WayBill> findAllByReciverId(String reciverId, Pageable pageable);
+
+    List<WayBill> findByPayCustomerAndState(String payCustomer, String state);
 }

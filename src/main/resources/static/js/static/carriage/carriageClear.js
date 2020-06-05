@@ -1,4 +1,4 @@
-let billId = window.location.href.split("=")[1];
+
 layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function () {
     let element = layui.element,
         form = layui.form,
@@ -6,7 +6,7 @@ layui.use(['element', 'form', 'laydate', 'jquery', 'layer', 'table'], function (
         layer = layui.layer,
         table = layui.table,
         $ = layui.jquery;
-
+    let billId = window.location.href.split("=")[1];
 
     laydate.render({
         elem: '#clearDate',
